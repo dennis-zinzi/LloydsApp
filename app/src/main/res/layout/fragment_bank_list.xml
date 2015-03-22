@@ -1,0 +1,15 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="uk.ac.ncl.csc2022.team10.locationmanager.BankListFragment">
+
+    <ListView
+        android:id="@+id/bankList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:entries="@array/example_items" >
+    </ListView>
+
+</RelativeLayout>
