@@ -16,6 +16,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+
+import com.google.android.gms.maps.model.LatLng;
+
 import uk.ac.ncl.csc2022.team10.lloydsapp.*;
 import uk.ac.ncl.csc2022.team10.tabbedpageadapters.MapTabbedPageAdapter;
 
@@ -25,7 +28,11 @@ public class LocateMapActivity extends ActionBarActivity implements ActionBar.Ta
     private ViewPager viewPager;
     private MapTabbedPageAdapter mAdapter;
     private String[] tabNames = { "Map", "List" };
-    private  ActionBar actionBar;
+    private ActionBar actionBar;
+
+    LatLng userLocation;
+
+    final String GOOGLE_KEY = "AIzaSyDL321g41odpLgnKf3CC61BIrobfAdjo2c";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +83,23 @@ public class LocateMapActivity extends ActionBarActivity implements ActionBar.Ta
             }
         });
 
+        //Get current location on Map
+        LocationManager service = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        String provider = service.getBestProvider(criteria, false);
+        Location location = service.getLastKnownLocation(provider);
+        //Get User's current location
+
+        if (location != null) {
+            userLocation = new LatLng(location.getLatitude(), location.getLongitude());
+        } else {
+            //If cannot find user location, set by default to Lloyds headquarters
+            //userLocation = new LatLng(51.516272, -0.095594);
+
+            //My uk location for test
+            userLocation = new LatLng(54.979575,-1.585737);
+        }
+
     }
 
 
@@ -123,4 +147,6 @@ public class LocateMapActivity extends ActionBarActivity implements ActionBar.Ta
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 
     }
+
+
 }

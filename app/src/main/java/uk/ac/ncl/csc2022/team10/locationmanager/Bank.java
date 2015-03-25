@@ -12,10 +12,16 @@ public class Bank {
     private String name;
     private String openingHours;
 
+    public Bank(){
+        loc = null;
+        name = "";
+        openingHours = "";
+    }
 
-    public Bank(LatLng latLng, String name){
-        //this.loc = latLng;
+    public Bank(LatLng loc, String name, String openingHours){
+        this.loc = loc;
         this.name = name;
+        this.openingHours = openingHours;
     }
 
     public LatLng getLoc() {

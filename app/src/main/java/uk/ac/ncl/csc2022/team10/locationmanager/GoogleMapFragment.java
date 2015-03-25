@@ -46,14 +46,14 @@ public class GoogleMapFragment extends Fragment {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState){
-            super.onActivityCreated(savedInstanceState);
-            FragmentManager fm = getChildFragmentManager();
-            fragment = (SupportMapFragment) fm.findFragmentById(R.id.map);
-            if (fragment == null) {
-                fragment = SupportMapFragment.newInstance();
-                fm.beginTransaction().replace(R.id.map, fragment).commit();
-            }
+        super.onActivityCreated(savedInstanceState);
+        FragmentManager fm = getChildFragmentManager();
+        fragment = (SupportMapFragment) fm.findFragmentById(R.id.map);
+        if (fragment == null) {
+            fragment = SupportMapFragment.newInstance();
+            fm.beginTransaction().replace(R.id.map, fragment).commit();
         }
+    }
 
 
 
@@ -92,7 +92,10 @@ public class GoogleMapFragment extends Fragment {
                 userLocation = new LatLng(location.getLatitude(), location.getLongitude());
             } else {
                 //If cannot find user location, set by default to Lloyds headquarters
-                userLocation = new LatLng(51.516272, -0.095594);
+                //userLocation = new LatLng(51.516272, -0.095594);
+
+                //My uk location for test
+                userLocation = new LatLng(54.979575,-1.585737);
             }
 
 
@@ -104,121 +107,16 @@ public class GoogleMapFragment extends Fragment {
 
             //Sets marker on Map to user's location
             MarkerOptions mo = new MarkerOptions();
-            googleMap.addMarker(mo.position(userLocation)).setTitle("Current Position");
+            if(location != null) {
+                googleMap.addMarker(mo.position(userLocation)).setTitle("Current Position");
+            }
+            else{
+                //googleMap.addMarker(mo.position(userLocation).title("Lloyds Headquarters"));
+                googleMap.addMarker(mo.position(userLocation).title("Current position"));
+            }
 
         }
     }
-
-
-//    @Override
-//    public void onAttach(Activity activity) {
-//        super.onAttach(activity);
-//    }
-
-//    private MapView mapView;
-//    private GoogleMap googleMap;
-//    private Bundle mBundle;
-//
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-//        View rootView = inflater.inflate(R.layout.fragment_map, container, false);
-//
-//        MapsInitializer.initialize(getActivity());
-//
-//
-//        mapView = (MapView) rootView.findViewById(R.id.map);
-//        mapView.onCreate(mBundle);
-//        //checkMap(rootView);
-//
-//        googleMap = ((MapView) rootView.findViewById(R.id.map)).getMap();
-//        googleMap.getUiSettings().setCompassEnabled(true);
-//
-//        //To get traffic info
-//        //googleMap.setTrafficEnabled(true);
-//
-//
-//        //Get current location on Map
-//        LocationManager service = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
-//        Criteria criteria = new Criteria();
-//        String provider = service.getBestProvider(criteria, false);
-//        Location location = service.getLastKnownLocation(provider);
-//
-//        //Get User's current location
-//        LatLng userLocation;
-//        if(location!=null){
-//            userLocation = new LatLng(location.getLatitude(), location.getLongitude());
-//        }
-//        else{
-//            //If cannot find user location, set by default to Lloyds headquarters
-//            userLocation = new LatLng(51.516272,-0.095594);
-//        }
-//
-//
-//        //Set zoom closer to user's location
-//        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 16));
-//
-//        //Dot to represent current location
-//        //googleMap.setMyLocationEnabled(true);
-//
-//        //Sets marker on Map to user's location
-//        MarkerOptions mo = new MarkerOptions();
-//        googleMap.addMarker(mo.position(userLocation)).setTitle("Current Position");
-//        return rootView;
-//    }
-//
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        //mBundle = savedInstanceState;
-//    }
-//
-//    private void checkMap(View inflatedView) {
-//        if (googleMap == null) {
-//            googleMap = ((MapView) inflatedView.findViewById(R.id.map)).getMap();
-//            if (googleMap != null) {
-//                startMap();
-//            }
-//        }
-//    }
-//
-//    private void startMap() {
-//        googleMap.getUiSettings().setCompassEnabled(true);
-//
-//        //To get traffic info
-//        //googleMap.setTrafficEnabled(true);
-//
-//
-//        //Get current location on Map
-//        LocationManager service = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
-//        Criteria criteria = new Criteria();
-//        String provider = service.getBestProvider(criteria, false);
-//        Location location = service.getLastKnownLocation(provider);
-//
-//        //Get User's current location
-//        LatLng userLocation;
-//        if(location!=null){
-//            userLocation = new LatLng(location.getLatitude(), location.getLongitude());
-//        }
-//        else{
-//            //If cannot find user location, set by default to Lloyds headquarters
-//            userLocation = new LatLng(51.516272,-0.095594);
-//        }
-//
-//
-//        //Set zoom closer to user's location
-//        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 16));
-//
-//        //Dot to represent current location
-//        //googleMap.setMyLocationEnabled(true);
-//
-//        //Sets marker on Map to user's location
-//        MarkerOptions mo = new MarkerOptions();
-//        googleMap.addMarker(mo.position(userLocation)).setTitle("Current Position");
-//
-//        //googleMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
-//    }
-
-
 
 
 }
