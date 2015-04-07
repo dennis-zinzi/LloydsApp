@@ -20,27 +20,27 @@
         android:textSize="20sp" />
 
     <Button
-        android:id="@+id/contactUs"
+        android:id="@+id/scanQR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/nearestBranch"
-        android:layout_alignLeft="@+id/nearestBranch"
+        android:layout_above="@+id/makeQR"
+        android:layout_alignLeft="@+id/makeQR"
         android:layout_marginBottom="14dp"
         android:text="Scan QR"
         android:width="150dp" />
 
     <Button
-        android:id="@+id/viewStatement"
+        android:id="@+id/sendMoney"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/contactUs"
-        android:layout_alignLeft="@+id/contactUs"
+        android:layout_above="@+id/scanQR"
+        android:layout_alignLeft="@+id/scanQR"
         android:layout_marginBottom="13dp"
         android:text="Send"
         android:width="150dp" />
 
     <Button
-        android:id="@+id/nearestBranch"
+        android:id="@+id/makeQR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -59,13 +59,13 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/toContact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imageButton1"
-        android:layout_centerHorizontal="true"
         android:singleLine="true"
-        android:ems="10" />
+        android:ems="10"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/availBalance"
@@ -73,12 +73,12 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/availLabel"
         android:layout_alignBottom="@+id/availLabel"
-        android:layout_alignRight="@+id/editText1"
+        android:layout_alignRight="@+id/amountBox"
         android:text="0.00"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/pound_symbol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/transferMoneyLabel"
@@ -93,34 +93,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/transferMoneyLabel"
-        android:layout_below="@+id/editText1"
+        android:layout_below="@+id/amountBox"
         android:text="Available:"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/amountBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText2"
-        android:layout_alignRight="@+id/editText2"
+        android:layout_alignLeft="@+id/toContact"
+        android:layout_alignRight="@+id/toContact"
         android:layout_below="@+id/transferMoneyLabel"
         android:ems="10"
         android:inputType="numberDecimal"
         android:textSize="50sp" />
 
     <ImageButton
-        android:id="@+id/imageButton1"
+        android:id="@+id/addContact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/editText2"
+        android:layout_toRightOf="@+id/toContact"
         android:src="@drawable/add_contact" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/pound_symbol2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText1"
+        android:layout_below="@+id/amountBox"
         android:layout_marginLeft="33dp"
         android:layout_toRightOf="@+id/availLabel"
         android:text="@string/pound_symbol"

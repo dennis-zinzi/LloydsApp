@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 //import android.widget.TextView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class TransferFragment extends Fragment {
@@ -19,6 +20,7 @@ public class TransferFragment extends Fragment {
 
     private TextView balanceLabel;
     private Account acc;
+    private ImageButton addContact;
 
     public static TransferFragment newInstance(int sectionNumber) {
         TransferFragment fragment = new TransferFragment();
@@ -39,6 +41,16 @@ public class TransferFragment extends Fragment {
 
         balanceLabel = (TextView)rootView.findViewById(R.id.availBalance);
         balanceLabel.setText(acc.getBalance()+"");
+        addContact = (ImageButton)rootView.findViewById(R.id.addContact);
+
+        addContact.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                
+            }
+        });
 
         return rootView;
     }

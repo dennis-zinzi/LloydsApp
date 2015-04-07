@@ -13,8 +13,8 @@
         android:id="@+id/accountLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/editText2"
-        android:layout_alignBottom="@+id/editText2"
+        android:layout_alignBaseline="@+id/toContact"
+        android:layout_alignBottom="@+id/toContact"
         android:layout_alignParentLeft="true"
         android:text="Account Number"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -43,9 +43,9 @@
         android:id="@+id/editText3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText2"
+        android:layout_alignLeft="@+id/toContact"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/toContact"
         android:layout_marginTop="41dp"
         android:ems="10"
         android:inputType="textPassword" />
@@ -73,7 +73,7 @@
         android:width="150dp" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/toContact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
