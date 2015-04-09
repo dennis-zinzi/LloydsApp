@@ -8,6 +8,8 @@ import uk.ac.ncl.csc2022.team10.datatypes.*;
 import uk.ac.ncl.csc2022.team10.dialogs.ContactDialog;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -72,8 +74,36 @@ public class TransferFragment extends Fragment {
 
             @Override
             public void onClick(View v){
-                u.getAccounts().get(0).transferFund(Double.parseDouble(amountBox.getText().toString()), selectedContact.getAccount());
-                Log.i("TRANSFERED", Double.parseDouble(amountBox.getText().toString())+ "to "+selectedContact.getName());
+                if(!amountBox.getText().toString().equals("") && selectedContact != null) {
+                    u.getAccounts().get(0).transferFund(Double.parseDouble(amountBox.getText().toString()), selectedContact.getAccount());
+                    Log.i("TRANSFERED", Double.parseDouble(amountBox.getText().toString()) + "to " + selectedContact.getName());
+                }
+                else{
+                    if(selectedContact != null) {
+                        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+                        alertDialog.setTitle("Warning");
+                        alertDialog.setMessage("Empty money field");
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
+                    }
+                    else{
+                        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+                        alertDialog.setTitle("Warning");
+                        alertDialog.setMessage("No contact selected");
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
+                    }
+                }
             }
         });
 
