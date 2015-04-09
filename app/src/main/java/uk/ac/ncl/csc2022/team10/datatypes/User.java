@@ -19,6 +19,8 @@ public class User {
         this.name = name;
         this.userID = userID;
         budgets = new ArrayList<Budget>();
+        contacts = new ArrayList<Contact>();
+        accounts = new ArrayList<Account>();
     }
 
     public void addBudget(Budget b){
@@ -64,6 +66,14 @@ public class User {
 
     public List<Contact> getContacts(){
         return contacts;
+    }
+
+    public void addContact(Contact c){
+        contacts.add(c);
+    }
+
+    public void addAccount(Account a){
+        accounts.add(a);
     }
 
 }

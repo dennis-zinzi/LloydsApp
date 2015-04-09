@@ -8,9 +8,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import uk.ac.ncl.csc2022.team10.datatypes.User;
 import uk.ac.ncl.csc2022.team10.lloydsapp.*;
 
 public class TabbedPageAdapter extends FragmentPagerAdapter {
+
 
     public TabbedPageAdapter(FragmentManager fm) {
         super(fm);

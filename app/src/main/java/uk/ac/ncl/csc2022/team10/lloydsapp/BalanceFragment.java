@@ -35,11 +35,13 @@ public class BalanceFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     public BalanceFragment() {
-        a = new Account(25,1096.67,2500.00);
-        u = new User("DZ",30);
-        u.addBudget(new Budget("Personal",100));
-        u.addBudget(new Budget("Groceries",200));
+        u = MainActivity.getUser();
+        //a = new Account(25,1096.67,2500.00);
+        //u = new User("DZ",30);
+        //u.addBudget(new Budget("Personal",100));
+        //u.addBudget(new Budget("Groceries",200));
     }
 
     @Override
@@ -56,8 +58,8 @@ public class BalanceFragment extends Fragment {
         addToBudget = (Button)rootView.findViewById(R.id.addToBudget);
         manageBudgets = (Button)rootView.findViewById(R.id.budgetManage);
 
-        balanceLabel.setText(a.getBalance()+"");
-        overdraftLabel.setText(a.getOverdraftLimit()+"");
+        balanceLabel.setText(u.getAccounts().get(0).getBalance()+"");
+        overdraftLabel.setText(u.getAccounts().get(0).getOverdraftLimit()+"");
 
         //Just code to learn/test creation of xml elements dynamically, will change it appropriately later
         addToBudget.setOnClickListener(new OnClickListener() {

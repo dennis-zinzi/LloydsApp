@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+import uk.ac.ncl.csc2022.team10.datatypes.*;
 import uk.ac.ncl.csc2022.team10.notificationmanager.*;
 import uk.ac.ncl.csc2022.team10.tabbedpageadapters.TabbedPageAdapter;
 
@@ -31,6 +32,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     // Tab names
     private String[] tabNames = { "Balance", "Transfer", "Wallets", "Banking" };
 
+    private static User u;
     /*Notifications*/
     GoogleCloudMessaging gcm;
     String regid;
@@ -77,6 +79,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         getRegId(); // On every start register this device
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getSupportActionBar();
+        makeUserExample();
 
         mAdapter = new TabbedPageAdapter(getSupportFragmentManager());
 
@@ -109,6 +112,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             public void onPageScrollStateChanged(int arg0) {
             }
         });
+
     }
 
     @Override
@@ -153,6 +157,18 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         }
     }
 
+    /**
+     *  Example User until implemented with Database
+     */
+     public void makeUserExample(){
+        u = new User("Dennis", 1);
+        Account a = new Account(1,100,1000);
+        u.addAccount(a);
+        u.addContact(new Contact("Tom",new Account(2,50,1000)));
+        u.addContact(new Contact("Sanzhar",new Account(3,190,5000)));
+        u.addContact(new Contact("Rhys",new Account(4,500,10000)));
+
+    }
 
     @Override
     public void onTabSelected(Tab tab, FragmentTransaction fragmentTransaction) {
@@ -167,5 +183,9 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     @Override
     public void onTabReselected(Tab tab, FragmentTransaction fragmentTransaction) {
 
+    }
+
+    public static User getUser(){
+        return u;
     }
 }

@@ -5,13 +5,19 @@ package uk.ac.ncl.csc2022.team10.lloydsapp;
  */
 
 import uk.ac.ncl.csc2022.team10.datatypes.*;
+import uk.ac.ncl.csc2022.team10.dialogs.ContactDialog;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 //import android.widget.TextView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -21,6 +27,11 @@ public class TransferFragment extends Fragment {
     private TextView balanceLabel;
     private Account acc;
     private ImageButton addContact;
+    private User u;
+    private static EditText toContact;
+    private Button sendMoney;
+    private EditText amountBox;
+    private static Contact selectedContact;
 
     public static TransferFragment newInstance(int sectionNumber) {
         TransferFragment fragment = new TransferFragment();
@@ -29,8 +40,10 @@ public class TransferFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     public TransferFragment() {
-        acc = new Account(25,1096.67,2500.00);
+        u = MainActivity.getUser();
+        //acc = new Account(25,1096.67,2500.00);
     }
 
     @Override
@@ -40,20 +53,49 @@ public class TransferFragment extends Fragment {
                 false);
 
         balanceLabel = (TextView)rootView.findViewById(R.id.availBalance);
-        balanceLabel.setText(acc.getBalance()+"");
+        balanceLabel.setText(u.getAccounts().get(0).getBalance()+"");
+        amountBox = (EditText)rootView.findViewById(R.id.amountBox);
+        toContact = (EditText)rootView.findViewById(R.id.toContact);
         addContact = (ImageButton)rootView.findViewById(R.id.addContact);
 
         addContact.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                showContactDialog();
 
-                
             }
         });
 
+        sendMoney = (Button)rootView.findViewById(R.id.sendMoney);
+        sendMoney.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+                u.getAccounts().get(0).transferFund(Double.parseDouble(amountBox.getText().toString()), selectedContact.getAccount());
+                Log.i("TRANSFERED", Double.parseDouble(amountBox.getText().toString())+ "to "+selectedContact.getName());
+            }
+        });
+
+
         return rootView;
     }
+
+
+    private void showContactDialog() {
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        ContactDialog contactDialog= new ContactDialog();
+        contactDialog.show(fm, "fragment_edit_name");
+    }
+
+    public static void setToContact(String contactName){
+        toContact.setText(contactName);
+    }
+
+    public static void setSelectedContact(Contact c){
+        selectedContact = c;
+    }
+
 //    @Override
 //    public void onAttach(Activity activity) {
 //        super.onAttach(activity);
