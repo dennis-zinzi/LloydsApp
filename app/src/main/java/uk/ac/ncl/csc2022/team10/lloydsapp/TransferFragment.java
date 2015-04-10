@@ -101,7 +101,7 @@ public class TransferFragment extends Fragment {
                     amountBox.setText("");
                 }
                 else{
-                    if(amountBox.getText().toString().equals()) {
+                    if(amountBox.getText().toString().equals("")) {
                         AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
                         alertDialog.setTitle("Warning");
                         alertDialog.setMessage("Empty money field");

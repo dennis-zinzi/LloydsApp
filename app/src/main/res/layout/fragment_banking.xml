@@ -38,8 +38,8 @@
         android:text="Pay Person"
         android:width="175dp"
         android:layout_above="@+id/standingOrders"
-        android:layout_alignLeft="@+id/viewStatement"
-        android:layout_alignStart="@+id/viewStatement" />
+        android:layout_alignLeft="@+id/payBills"
+        android:layout_alignStart="@+id/payBills" />
 
     <Button
         android:id="@+id/payBills"
@@ -58,7 +58,7 @@
         android:height="30dp"
         android:text="View Statement"
         android:width="175dp"
-        android:layout_below="@+id/bankLogo"
+        android:layout_above="@+id/payBills"
         android:layout_alignLeft="@+id/payBills"
         android:layout_alignStart="@+id/payBills" />
 

@@ -17,6 +17,7 @@ import uk.ac.ncl.csc2022.team10.lloydsapp.NewContactActivity;
 import uk.ac.ncl.csc2022.team10.lloydsapp.R;
 import uk.ac.ncl.csc2022.team10.lloydsapp.TransferFragment;
 
+
 /**
  * Created by Dennis on 7/4/15.
  */
@@ -64,14 +65,13 @@ public class ContactDialog extends DialogFragment {
                 .setSingleChoiceItems(contactNames.toArray(new String[contactNames.size()]), -1, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.i("SELECTED",which+"");
-                        if(which == contactList.size()){
+                        Log.i("SELECTED", which + "");
+                        if (which == contactList.size()) {
                             //Go to screen to add new Contact
                             Intent i = new Intent(getActivity(), NewContactActivity.class);
                             startActivity(i);
                             dismiss();
-                        }
-                        else {
+                        } else {
                             selected = contactList.get(which);
                         }
 
@@ -79,9 +79,11 @@ public class ContactDialog extends DialogFragment {
                 })
                 .setPositiveButton("Select", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        //Sets contact in TransferFragment to selected Contact from Dialog
-                        TransferFragment.setToContact(selected.getName());
-                        TransferFragment.setSelectedContact(selected);
+                        if (selected != null) {
+                            //Sets contact in TransferFragment to selected Contact from Dialog
+                            TransferFragment.setToContact(selected.getName());
+                            TransferFragment.setSelectedContact(selected);
+                        }
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
