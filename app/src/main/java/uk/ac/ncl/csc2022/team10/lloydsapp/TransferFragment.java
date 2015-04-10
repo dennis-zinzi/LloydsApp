@@ -29,7 +29,7 @@ public class TransferFragment extends Fragment {
     private TextView balanceLabel;
     private Account acc;
     private ImageButton addContact;
-    private User u;
+    private User user;
     private static EditText toContact;
     private Button sendMoney;
     private EditText amountBox;
@@ -44,7 +44,7 @@ public class TransferFragment extends Fragment {
     }
 
     public TransferFragment() {
-        u = MainActivity.getUser();
+        user = MainActivity.getUser();
         //acc = new Account(25,1096.67,2500.00);
     }
 
@@ -55,7 +55,7 @@ public class TransferFragment extends Fragment {
                 false);
 
         balanceLabel = (TextView)rootView.findViewById(R.id.availBalance);
-        balanceLabel.setText(u.getAccounts().get(0).getBalance()+"");
+        balanceLabel.setText(user.getAccounts().get(0).getBalance()+"");
         amountBox = (EditText)rootView.findViewById(R.id.amountBox);
         toContact = (EditText)rootView.findViewById(R.id.toContact);
         addContact = (ImageButton)rootView.findViewById(R.id.addContact);
@@ -75,11 +75,33 @@ public class TransferFragment extends Fragment {
             @Override
             public void onClick(View v){
                 if(!amountBox.getText().toString().equals("") && selectedContact != null) {
-                    u.getAccounts().get(0).transferFund(Double.parseDouble(amountBox.getText().toString()), selectedContact.getAccount());
-                    Log.i("TRANSFERED", Double.parseDouble(amountBox.getText().toString()) + "to " + selectedContact.getName());
+                    //Check if enough funds to make transfer
+                    if(user.getAccounts().get(0).getBalance()-Double.parseDouble(amountBox.getText().toString())>=0) {
+                        //Transfers inputted money to selected account
+                        user.getAccounts().get(0).transferFund(Double.parseDouble(amountBox.getText().toString()), selectedContact.getAccount());
+                        Log.i("TRANSFERED", Double.parseDouble(amountBox.getText().toString()) + "to " + selectedContact.getName());
+                        //Update balance label
+                        balanceLabel.setText(user.getAccounts().get(0).getBalance() + "");
+                    }
+                    else{
+                        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+                        alertDialog.setTitle("Error");
+                        alertDialog.setMessage("Not enough funds to make transfer");
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        alertDialog.show();
+                    }
+                    //Reset fields
+                    toContact.setText("");
+                    selectedContact = null;
+                    amountBox.setText("");
                 }
                 else{
-                    if(selectedContact != null) {
+                    if(amountBox.getText().toString().equals()) {
                         AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
                         alertDialog.setTitle("Warning");
                         alertDialog.setMessage("Empty money field");

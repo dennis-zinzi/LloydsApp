@@ -3,6 +3,7 @@ package uk.ac.ncl.csc2022.team10.dialogs;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
@@ -12,6 +13,7 @@ import java.util.*;
 
 import uk.ac.ncl.csc2022.team10.datatypes.*;
 import uk.ac.ncl.csc2022.team10.lloydsapp.MainActivity;
+import uk.ac.ncl.csc2022.team10.lloydsapp.NewContactActivity;
 import uk.ac.ncl.csc2022.team10.lloydsapp.R;
 import uk.ac.ncl.csc2022.team10.lloydsapp.TransferFragment;
 
@@ -20,7 +22,7 @@ import uk.ac.ncl.csc2022.team10.lloydsapp.TransferFragment;
  */
 public class ContactDialog extends DialogFragment {
 
-    private User u;
+    private User user;
     private List<Contact> contactList;
     private static Contact selected;
 
@@ -36,7 +38,7 @@ public class ContactDialog extends DialogFragment {
 //        contactList.add(c2);
 //        contactList.add(c3);
 //
-        for(Contact c : u.getContacts()){
+        for(Contact c : user.getContacts()){
             contactList.add(c);
         }
 
@@ -55,7 +57,7 @@ public class ContactDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        u = MainActivity.getUser();
+        user = MainActivity.getUser();
         makeContacts();
         final List<String> contactNames = getContactNames(contactList);
         builder.setTitle("Select Contact")
@@ -65,7 +67,9 @@ public class ContactDialog extends DialogFragment {
                         Log.i("SELECTED",which+"");
                         if(which == contactList.size()){
                             //Go to screen to add new Contact
-
+                            Intent i = new Intent(getActivity(), NewContactActivity.class);
+                            startActivity(i);
+                            dismiss();
                         }
                         else {
                             selected = contactList.get(which);

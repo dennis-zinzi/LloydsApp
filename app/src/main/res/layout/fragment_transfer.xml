@@ -108,7 +108,8 @@
         android:ems="10"
         android:maxLength="7"
         android:inputType="numberDecimal"
-        android:textSize="50sp" />
+        android:textSize="50sp"
+        android:imeOptions="actionDone" />
 
     <ImageButton
         android:id="@+id/addContact"

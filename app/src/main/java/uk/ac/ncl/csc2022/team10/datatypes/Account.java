@@ -37,6 +37,8 @@ public class Account {
         int year = c.get(Calendar.YEAR);
         String date = day+"/"+month+"/"+year;
         transactionList.add(new Transaction(amount,date,this,to));
+
+        //Add code to Update DB
     }
 
     public double getBalance(){
