@@ -108,6 +108,10 @@
             android:name="uk.ac.ncl.csc2022.team10.banking.StatementActivity"
             android:label="@string/title_activity_statement" >
         </activity>
+        <activity
+            android:name="uk.ac.ncl.csc2022.team10.banking.PayPersonActivity"
+            android:label="@string/title_activity_pay_person" >
+        </activity>
     </application>
 
 </manifest>

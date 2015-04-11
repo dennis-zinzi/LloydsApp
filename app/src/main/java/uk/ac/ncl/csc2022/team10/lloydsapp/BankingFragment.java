@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import uk.ac.ncl.csc2022.team10.banking.PayPersonActivity;
 import uk.ac.ncl.csc2022.team10.banking.StatementActivity;
 import uk.ac.ncl.csc2022.team10.datatypes.User;
 
@@ -53,7 +54,8 @@ public class BankingFragment extends Fragment {
         payPerson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), PayPersonActivity.class);
+                startActivity(intent);
             }
         });
 
