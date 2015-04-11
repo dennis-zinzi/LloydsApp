@@ -43,7 +43,8 @@ public class NewContactActivity extends ActionBarActivity {
                 if(!nameBox.getText().toString().equals("") && !accountNum.getText().toString().equals("")){
                     //Check DB for Account with corresponding Account Number
                     //Account acc = SELECT * FROM Accounts WHERE AccountID = Integer.parseInt(accountNum.toString());
-                    Account acc = new Account(10,200,9000);
+                    Account acc = new Account(Integer.parseInt(accountNum.getText().toString()),200,9000);
+                    //Should throw Alert Dialog if no Account match
                     Contact newContact = new Contact(nameBox.getText().toString(),acc);
                     user.addContact(newContact);
                     TransferFragment.setToContact(newContact.getName());

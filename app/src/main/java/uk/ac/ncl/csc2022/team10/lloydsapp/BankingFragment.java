@@ -1,18 +1,26 @@
 package uk.ac.ncl.csc2022.team10.lloydsapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import uk.ac.ncl.csc2022.team10.banking.StatementActivity;
 import uk.ac.ncl.csc2022.team10.datatypes.User;
 
 public class BankingFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
-    private User u;
+    private User user;
+
+    private Button viewStatement;
+    private Button payPerson;
+    private Button payBills;
+    private Button standingOrders;
 
     public static BankingFragment newInstance(int sectionNumber) {
         BankingFragment fragment = new BankingFragment();
@@ -22,7 +30,7 @@ public class BankingFragment extends Fragment {
         return fragment;
     }
     public BankingFragment() {
-        u = MainActivity.getUser();
+        user = MainActivity.getUser();
     }
 
     @Override
@@ -30,6 +38,24 @@ public class BankingFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_banking, container,
                 false);
+
+        viewStatement = (Button)rootView.findViewById(R.id.viewStatement);
+        payPerson = (Button)rootView.findViewById(R.id.payPerson);
+
+        viewStatement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),StatementActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        payPerson.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         return rootView;
     }

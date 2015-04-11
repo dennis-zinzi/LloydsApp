@@ -20,6 +20,6 @@ public class Transaction {
     @Override
     public String toString(){
         //return "£"+amount+" from account "+from.getAccountID()+" to account "+to.getAccountID()+" on the "+date;
-        return date+"\t£"+amount+"\tFrom account"+from.getAccountID()+" to account "+to.getAccountID();
+        return date+"\t£"+amount+"\tFrom acc "+from.getAccountID()+" to acc "+to.getAccountID();
     }
 }
