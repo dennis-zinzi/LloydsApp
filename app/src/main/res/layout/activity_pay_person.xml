@@ -63,15 +63,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Contact Name: \n(To Save Contact\n for future)"
+        android:text="Contact Name: \n(To Save\nContact\nfor future)"
         android:id="@+id/contactName"
-        android:layout_centerVertical="true"
+        android:layout_alignTop="@+id/contactNameSave"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/confirmButton"
-        android:layout_toLeftOf="@+id/confirmButton"
-        android:layout_alignRight="@+id/confirmButton"
-        android:layout_alignEnd="@+id/confirmButton" />
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -114,5 +110,35 @@
         android:layout_alignLeft="@+id/paypPersonLabel"
         android:layout_alignStart="@+id/paypPersonLabel"
         android:textSize="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Available:"
+        android:id="@+id/textView17"
+        android:layout_below="@+id/amountPerson"
+        android:layout_alignLeft="@+id/toAccountNum"
+        android:layout_alignStart="@+id/toAccountNum" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="£"
+        android:id="@+id/pound_sym"
+        android:layout_below="@+id/amountPerson"
+        android:layout_toRightOf="@+id/paypPersonLabel"
+        android:layout_toEndOf="@+id/paypPersonLabel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="10000.00"
+        android:id="@+id/availNum"
+        android:layout_alignBottom="@+id/pound_sym"
+        android:layout_alignRight="@+id/amountPerson"
+        android:layout_alignEnd="@+id/amountPerson" />
 
 </RelativeLayout>

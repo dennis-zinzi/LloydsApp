@@ -40,7 +40,7 @@ public class StatementActivity extends ActionBarActivity {
         getTransactionList();
 
         balanceNum = (TextView)findViewById(R.id.balanceNum);
-        balanceNum.setText(user.getAccounts().get(0).getBalance()+"");
+        balanceNum.setText(String.format("%.2f",user.getAccounts().get(0).getBalance()));
 
         statementList = (ListView)findViewById(R.id.statementList);
 

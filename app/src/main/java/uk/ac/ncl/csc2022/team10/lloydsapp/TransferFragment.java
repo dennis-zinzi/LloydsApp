@@ -55,7 +55,7 @@ public class TransferFragment extends Fragment {
                 false);
 
         balanceLabel = (TextView)rootView.findViewById(R.id.availBalance);
-        balanceLabel.setText(user.getAccounts().get(0).getBalance()+"");
+        balanceLabel.setText(String.format("%.2f",user.getAccounts().get(0).getBalance()));
         amountBox = (EditText)rootView.findViewById(R.id.amountBox);
         toContact = (EditText)rootView.findViewById(R.id.toContact);
         addContact = (ImageButton)rootView.findViewById(R.id.addContact);
@@ -78,10 +78,10 @@ public class TransferFragment extends Fragment {
                     //Check if enough funds to make transfer
                     if(user.getAccounts().get(0).getBalance()-Double.parseDouble(amountBox.getText().toString())>=0) {
                         //Transfers inputted money to selected account
-                        user.getAccounts().get(0).transferFund(Double.parseDouble(amountBox.getText().toString()), selectedContact.getAccount());
+                        user.getAccounts().get(0).transferFund(Double.parseDouble(String.format("%.2f",Double.parseDouble(amountBox.getText().toString()))), selectedContact.getAccount());
                         Log.i("TRANSFERED", Double.parseDouble(amountBox.getText().toString()) + "to " + selectedContact.getName());
                         //Update balance label
-                        balanceLabel.setText(user.getAccounts().get(0).getBalance() + "");
+                        balanceLabel.setText(String.format("%.2f",user.getAccounts().get(0).getBalance()));
                     }
                     else{
                         AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
