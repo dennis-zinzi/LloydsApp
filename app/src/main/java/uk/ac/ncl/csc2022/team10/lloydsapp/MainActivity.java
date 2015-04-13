@@ -161,13 +161,12 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
      *  Example User until implemented with Database
      */
      public void makeUserExample(){
-        u = new User("Dennis", 1);
+        u = new User("Dennis", "123456");
         Account a = new Account(1,100,1000);
         u.addAccount(a);
         u.addContact(new Contact("Tom",new Account(2,50,1000)));
         u.addContact(new Contact("Sanzhar",new Account(3,190,5000)));
         u.addContact(new Contact("Rhys",new Account(4,500,10000)));
-
     }
 
     @Override

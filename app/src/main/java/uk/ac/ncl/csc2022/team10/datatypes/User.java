@@ -5,7 +5,7 @@ import java.util.*;
 public class User {
 
     private String name;
-    private int userID;
+    private String userID;
     private String birthday;
     private String address;
     private String password;
@@ -15,7 +15,7 @@ public class User {
     private List<Wallet> wallets;
 
 
-    public User(String name, int userID){
+    public User(String name, String userID){
         this.name = name;
         this.userID = userID;
         budgets = new ArrayList<Budget>();
@@ -31,7 +31,7 @@ public class User {
         return name;
     }
 
-    public int getUserID() {
+    public String getUserID() {
         return userID;
     }
 
