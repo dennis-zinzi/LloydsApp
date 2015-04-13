@@ -87,10 +87,9 @@ public class BalanceFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                if(budgetLabel1.getText()!=""){
-                    budgetLabel1.setText("");
-                }
+
+                Intent intent = new Intent(getActivity(),BudgetActivity.class);
+                startActivity(intent);
             }
         });
 
