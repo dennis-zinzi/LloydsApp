@@ -18,6 +18,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -27,6 +28,8 @@ public class GoogleMapFragment extends Fragment {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
+
+    final String GOOGLE_KEY = "AIzaSyDL321g41odpLgnKf3CC61BIrobfAdjo2c";
 
     private GoogleMap googleMap;
     private SupportMapFragment fragment;
@@ -91,31 +94,44 @@ public class GoogleMapFragment extends Fragment {
             if (location != null) {
                 userLocation = new LatLng(location.getLatitude(), location.getLongitude());
             } else {
-                //If cannot find user location, set by default to Lloyds headquarters
-                //userLocation = new LatLng(51.516272, -0.095594);
-
-                //My uk location for test
-                userLocation = new LatLng(54.979575,-1.585737);
+                //If cannot find user location, set to default to Lloyds headquarters
+                userLocation = new LatLng(51.516272, -0.095594);
             }
 
 
             //Set zoom closer to user's location
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 16));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 14));
 
             //Dot to represent current location
-            //googleMap.setMyLocationEnabled(true);
+            googleMap.setMyLocationEnabled(true);
 
             //Sets marker on Map to user's location
             MarkerOptions mo = new MarkerOptions();
             if(location != null) {
                 googleMap.addMarker(mo.position(userLocation)).setTitle("Current Position");
+
             }
             else{
                 //googleMap.addMarker(mo.position(userLocation).title("Lloyds Headquarters"));
                 googleMap.addMarker(mo.position(userLocation).title("Current position"));
             }
 
+
+            StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+            googlePlacesUrl.append("location=" + location.getLatitude() + "," + location.getLongitude());
+            googlePlacesUrl.append("&radius=" + 5000);
+            googlePlacesUrl.append("&keyword=lloydsbank");
+            googlePlacesUrl.append("&key="+GOOGLE_KEY);
+
+            GooglePlacesGetter googlePlacesReadTask = new GooglePlacesGetter();
+            Object[] toPass = new Object[2];
+            toPass[0] = googleMap;
+            toPass[1] = googlePlacesUrl.toString();
+            googlePlacesReadTask.execute(toPass);
+
+
         }
+
     }
 
 
