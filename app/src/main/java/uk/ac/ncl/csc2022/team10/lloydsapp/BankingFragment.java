@@ -1,6 +1,5 @@
 package uk.ac.ncl.csc2022.team10.lloydsapp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import uk.ac.ncl.csc2022.team10.banking.PayPersonActivity;
 import uk.ac.ncl.csc2022.team10.banking.StatementActivity;
@@ -40,7 +38,7 @@ public class BankingFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_banking, container,
                 false);
 
-        viewStatement = (Button)rootView.findViewById(R.id.viewStatement);
+        viewStatement = (Button)rootView.findViewById(R.id.faq);
         payPerson = (Button)rootView.findViewById(R.id.payPerson);
 
         viewStatement.setOnClickListener(new View.OnClickListener() {

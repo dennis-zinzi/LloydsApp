@@ -53,5 +53,6 @@
     <string name="title_activity_new_contact">NewContactActivity</string>
     <string name="title_activity_statement">StatementActivity</string>
     <string name="title_activity_pay_person">PayPersonActivity</string>
+    <string name="title_activity_faq">FAQActivity</string>
 
 </resources>

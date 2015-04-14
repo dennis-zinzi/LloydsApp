@@ -1,6 +1,8 @@
 package uk.ac.ncl.csc2022.team10.locationmanager;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -110,24 +112,35 @@ public class GoogleMapFragment extends Fragment {
             if(location != null) {
                 googleMap.addMarker(mo.position(userLocation)).setTitle("Current Position");
 
+                StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+                googlePlacesUrl.append("location=" + location.getLatitude() + "," + location.getLongitude());
+                googlePlacesUrl.append("&radius=" + 5000);
+                googlePlacesUrl.append("&keyword=lloydsbank");
+                googlePlacesUrl.append("&key="+GOOGLE_KEY);
+
+                GooglePlacesGetter googlePlacesReadTask = new GooglePlacesGetter();
+                Object[] toPass = new Object[2];
+                toPass[0] = googleMap;
+                toPass[1] = googlePlacesUrl.toString();
+                googlePlacesReadTask.execute(toPass);
+
             }
             else{
-                //googleMap.addMarker(mo.position(userLocation).title("Lloyds Headquarters"));
-                googleMap.addMarker(mo.position(userLocation).title("Current position"));
+                //If cannot find User's location, set to Lloyds' hq
+                googleMap.addMarker(mo.position(userLocation).title("Lloyds HQ"));
+
+                AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+                alertDialog.setTitle("Sorry");
+                alertDialog.setMessage("Cannot Retrieve current location");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
             }
 
-
-            StringBuilder googlePlacesUrl = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
-            googlePlacesUrl.append("location=" + location.getLatitude() + "," + location.getLongitude());
-            googlePlacesUrl.append("&radius=" + 5000);
-            googlePlacesUrl.append("&keyword=lloydsbank");
-            googlePlacesUrl.append("&key="+GOOGLE_KEY);
-
-            GooglePlacesGetter googlePlacesReadTask = new GooglePlacesGetter();
-            Object[] toPass = new Object[2];
-            toPass[0] = googleMap;
-            toPass[1] = googlePlacesUrl.toString();
-            googlePlacesReadTask.execute(toPass);
 
 
         }

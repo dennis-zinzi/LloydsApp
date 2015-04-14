@@ -39,7 +39,7 @@ public class LoginActivity extends Activity implements OnClickListener {
     private EditText account;
     private EditText password;
     private final static String USER_AGENT = "Mozilla/5.0";
-    private static User u;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +86,8 @@ public class LoginActivity extends Activity implements OnClickListener {
                     if (result == 1) {
                         account = (EditText) findViewById(R.id.toContact);
                         Log.i("MY SYSTEM", "All passed");
-                        makeUserExample("Den", account.getText().toString());
+                        makeUser("Den", account.getText().toString());
+                        MainActivity.setUser(user);
                         startActivity(intent1);
                     } else {
                         Log.i("MY SYSTEM", "BAD");
@@ -116,17 +117,14 @@ public class LoginActivity extends Activity implements OnClickListener {
 
     }
 
-    public void makeUserExample(String name,String userId){
-        u = new User(name, userId);
+    public void makeUser(String name,String userId){
+        user = new User(name, userId);
         Account a = new Account(1,10000,1000);
-        u.addAccount(a);
-        u.addContact(new Contact("Tom",new Account(2,50,1000)));
-        u.addContact(new Contact("Sanzhar",new Account(3,190,5000)));
-        u.addContact(new Contact("Rhys",new Account(4,500,10000)));
-    }
-
-    public static User getUser(){
-        return u;
+        user.addAccount(a);
+        user.addContact(new Contact("Tom",new Account(2,50,1000)));
+        user.addContact(new Contact("Sanzhar",new Account(3,190,5000)));
+        user.addContact(new Contact("Rhys",new Account(4,500,10000)));
+        user.addContact(new Contact("Ashley",new Account(5,300,100)));
     }
 
 

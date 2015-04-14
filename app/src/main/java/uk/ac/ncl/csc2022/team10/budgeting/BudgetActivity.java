@@ -1,10 +1,9 @@
-package uk.ac.ncl.csc2022.team10.lloydsapp;
+package uk.ac.ncl.csc2022.team10.budgeting;
 
 
 
         import java.util.ArrayList;
 
-        import android.app.ActionBar;
         import android.app.Activity;
         import android.app.AlertDialog;
         import android.content.DialogInterface;
@@ -24,6 +23,8 @@ package uk.ac.ncl.csc2022.team10.lloydsapp;
         import android.widget.ScrollView;
         import android.widget.TextView;
         import android.widget.Toast;
+
+        import uk.ac.ncl.csc2022.team10.lloydsapp.R;
 
 
 public class BudgetActivity extends Activity {

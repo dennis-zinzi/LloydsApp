@@ -32,7 +32,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     // Tab names
     private String[] tabNames = { "Balance", "Transfer", "Wallets", "Banking" };
 
-    private static User u;
+    private static User user;
     /*Notifications*/
     GoogleCloudMessaging gcm;
     String regid;
@@ -79,7 +79,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         getRegId(); // On every start register this device
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getSupportActionBar();
-        makeUserExample();
+        //makeUserExample();
 
         mAdapter = new TabbedPageAdapter(getSupportFragmentManager());
 
@@ -161,12 +161,12 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
      *  Example User until implemented with Database
      */
      public void makeUserExample(){
-        u = new User("Dennis", "123456");
+        user = new User("Dennis", "123456");
         Account a = new Account(1,100,1000);
-        u.addAccount(a);
-        u.addContact(new Contact("Tom",new Account(2,50,1000)));
-        u.addContact(new Contact("Sanzhar",new Account(3,190,5000)));
-        u.addContact(new Contact("Rhys",new Account(4,500,10000)));
+        user.addAccount(a);
+        user.addContact(new Contact("Tom",new Account(2,50,1000)));
+        user.addContact(new Contact("Sanzhar",new Account(3,190,5000)));
+        user.addContact(new Contact("Rhys",new Account(4,500,10000)));
     }
 
     @Override
@@ -185,6 +185,10 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     }
 
     public static User getUser(){
-        return u;
+        return user;
+    }
+
+    public static void setUser(User u){
+        user = u;
     }
 }

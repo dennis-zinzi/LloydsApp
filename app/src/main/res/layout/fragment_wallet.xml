@@ -43,7 +43,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
-        android:id="@+id/viewStatement"
+        android:id="@+id/faq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView4"
@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/viewStatement"
+        android:layout_below="@+id/faq"
         android:layout_marginTop="31dp"
         android:text="Google Play:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -85,7 +85,7 @@
         android:id="@+id/contactUs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/viewStatement"
+        android:layout_alignRight="@+id/faq"
         android:layout_below="@+id/textView6"
         android:layout_marginTop="14dp"
         android:text="Deposit"

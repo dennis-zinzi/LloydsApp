@@ -13,12 +13,14 @@ import android.view.View;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 
+import uk.ac.ncl.csc2022.team10.help.FAQActivity;
 import uk.ac.ncl.csc2022.team10.locationmanager.LocateMapActivity;
 
 public class HelpActivity extends ActionBarActivity implements OnClickListener {
 
     Button nearestBranch;
     Button productInfo;
+    Button faq;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,16 @@ public class HelpActivity extends ActionBarActivity implements OnClickListener {
                 //Goes to product info Page
                 //Intent intent = new Intent(context, Object.class);
                 //startActivityForResult(intent, 3);
+            }
+        });
+
+        faq = (Button)findViewById(R.id.faq);
+        faq.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Goes to FAQ page
+                Intent intent = new Intent(context, FAQActivity.class);
+                startActivityForResult(intent,3);
             }
         });
     }
