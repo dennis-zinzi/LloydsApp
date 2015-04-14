@@ -37,11 +37,8 @@ public class BalanceFragment extends Fragment {
     }
 
     public BalanceFragment() {
-        user = MainActivity.getUser();
-        //a = new Account(25,1096.67,2500.00);
-        //u = new User("DZ",30);
-        //u.addBudget(new Budget("Personal",100));
-        //u.addBudget(new Budget("Groceries",200));
+        //user = MainActivity.getUser();
+        user = LoginActivity.getUser();
     }
 
     @Override
@@ -101,10 +98,5 @@ public class BalanceFragment extends Fragment {
 
         return rootView;
     }
-    //	@Override
-    //	public void onAttach(Activity activity) {
-    //		super.onAttach(activity);
-    //		((MainActivity) activity).onSectionAttached(getArguments().getInt(
-    //				ARG_SECTION_NUMBER));
-    //	}
+
 }

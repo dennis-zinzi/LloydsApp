@@ -3,30 +3,49 @@ package uk.ac.ncl.csc2022.team10.lloydsapp;
 import android.app.Activity;
 //import android.view.*;
 //import android.app.AlertDialog;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 //import android.graphics.Color;
 //import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 
-public class LoginActivity extends Activity implements OnClickListener{
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.concurrent.ExecutionException;
 
+import uk.ac.ncl.csc2022.team10.datatypes.Account;
+import uk.ac.ncl.csc2022.team10.datatypes.Contact;
+import uk.ac.ncl.csc2022.team10.datatypes.User;
+import uk.ac.ncl.csc2022.team10.encryption.Encryption;
 
-    Button loginButton;
-    Button exitButton;
+public class LoginActivity extends Activity implements OnClickListener {
+
+    private Button loginButton;
+    private Button exitButton;
+    private EditText account;
+    private EditText password;
+    private final static String USER_AGENT = "Mozilla/5.0";
+    private static User u;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_login);
-
         addListenerOnButton();
     }
 
@@ -52,43 +71,39 @@ public class LoginActivity extends Activity implements OnClickListener{
 
     public void addListenerOnButton() {
         final Context context = this;
+        final Intent intent1 = new Intent(this, MainActivity.class);
+        final MyAsyncTask asyncTask = new MyAsyncTask();
 
-        //Determine button to add listener to
         loginButton = (Button) findViewById(R.id.login);
-        exitButton = (Button)findViewById(R.id.exit);
+        exitButton = (Button) findViewById(R.id.exit);
 
         //Add listener using Anonymous class
         loginButton.setOnClickListener(new OnClickListener() {
-
             @Override
             public void onClick(View v) {
-
-				/*
-				 * Code to verify login details and log user into main menu
-				 */
-
-				/*
-				 * Code to move to Passcode Login
-				 * Intent intent = new Intent(context, PasscodeLoginActivity.class);
-				 * startActivity(intent);
-				 */
-
-                //Go to menu for now
-                Intent intent = new Intent(context, MainActivity.class);
-//				Intent intent = new Intent(context, MainMenuActivity.class);
-
-                startActivity(intent);
-
+                try {
+                    Integer result = asyncTask.execute().get();
+                    if (result == 1) {
+                        account = (EditText) findViewById(R.id.toContact);
+                        Log.i("MY SYSTEM", "All passed");
+                        makeUserExample("Den", account.getText().toString());
+                        startActivity(intent1);
+                    } else {
+                        Log.i("MY SYSTEM", "BAD");
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
             }
 
         });
 
         exitButton.setOnClickListener(new OnClickListener() {
-
             @Override
             public void onClick(View v) {
-
-                //Exits app
+                    /* Exit app */
                 Intent intent = new Intent(Intent.ACTION_MAIN);
                 intent.addCategory(Intent.CATEGORY_HOME);
                 startActivity(intent);
@@ -98,7 +113,80 @@ public class LoginActivity extends Activity implements OnClickListener{
 
     @Override
     public void onClick(View v) {
-        // TODO Auto-generated method stub
 
     }
+
+    public void makeUserExample(String name,String userId){
+        u = new User(name, userId);
+        Account a = new Account(1,10000,1000);
+        u.addAccount(a);
+        u.addContact(new Contact("Tom",new Account(2,50,1000)));
+        u.addContact(new Contact("Sanzhar",new Account(3,190,5000)));
+        u.addContact(new Contact("Rhys",new Account(4,500,10000)));
+    }
+
+    public static User getUser(){
+        return u;
+    }
+
+
+    private class MyAsyncTask extends AsyncTask<String, Void, Integer> {
+        /** Essential data types **/
+        private LoginActivity ac = new LoginActivity();
+        private String enteredAccount;
+        private String encrypted;
+        private String enteredPassword;
+        private Encryption enc;
+        private String url;
+        private URL obj;
+        private HttpURLConnection con1;
+        private String urlParameters;
+        private DataOutputStream wr;
+        private BufferedReader in;
+        private String inputLine;
+
+        @Override
+        protected Integer doInBackground(String... params) {
+            account = (EditText) findViewById(R.id.toContact);
+            password = (EditText) findViewById(R.id.editText3);
+            enc = new Encryption();
+            enteredAccount = account.getText().toString();
+            enteredPassword = password.getText().toString();
+            encrypted = enc.encrypt(enteredPassword);
+            Log.i("MyAsyncTask", "Here what i have : " + enteredAccount + ", " + enteredPassword + ", " + encrypted);
+            try {
+                url = "http://zholdiyarov.zz.mu/encrypt.php";
+                obj = new URL(url);
+                con1 = (HttpURLConnection) obj.openConnection();
+
+                con1.setRequestMethod("POST");
+                con1.setRequestProperty("User-Agent", USER_AGENT);
+                con1.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+                con1.setDoOutput(true);
+
+                urlParameters = "pwd=" + encrypted + "&account=" + enteredAccount;
+
+                wr = new DataOutputStream(con1.getOutputStream());
+                wr.writeBytes(urlParameters);
+                wr.flush();
+                wr.close();
+
+                in = new BufferedReader(new InputStreamReader(
+                        con1.getInputStream()));
+
+                while ((inputLine = in.readLine()) != null) {
+                    if (inputLine.equals("good")) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+                in.close();
+            } catch (Exception e) {
+                return 0;
+            }
+            return 0;
+        }
+    }
+
 }
