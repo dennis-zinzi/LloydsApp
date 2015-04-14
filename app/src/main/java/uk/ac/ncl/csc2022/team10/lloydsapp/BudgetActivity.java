@@ -37,7 +37,7 @@ public class BudgetActivity extends Activity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setTitle("Budgeting");
-        ActionBar actionBar = getActionBar();
+
 
         budgets = getData();
 
