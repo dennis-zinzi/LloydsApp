@@ -4,8 +4,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,12 +38,14 @@ public class PayPersonActivity extends ActionBarActivity {
         setContentView(R.layout.activity_pay_person);
         user = MainActivity.getUser();
 
+        setTitle("Pay Person");
+
         amountPerson = (EditText)findViewById(R.id.amountPerson);
         toAccountNum = (EditText)findViewById(R.id.toAccountNum);
         contactNameSave = (EditText)findViewById(R.id.contactNameSave);
 
         availNum = (TextView)findViewById(R.id.availNum);
-        availNum.setText(String.format("%.2f",user.getAccounts().get(0).getBalance()));
+        availNum.setText(String.format("%.2f",user.getAccount().getBalance()));
 
         confirmButton = (Button)findViewById(R.id.confirmButton);
 
@@ -57,13 +61,13 @@ public class PayPersonActivity extends ActionBarActivity {
                         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
-                                        if(user.getAccounts().get(0).getBalance()-Double.parseDouble(amountPerson.getText().toString())>=0) {
+                                        if(user.getAccount().getBalance()-Double.parseDouble(amountPerson.getText().toString())>=0) {
                                             Account acc = new Account(Integer.parseInt(toAccountNum.getText().toString()), 500, 10000);
-                                            user.getAccounts().get(0).transferFund(Double.parseDouble(String.format("%.2f", Double.parseDouble(amountPerson.getText().toString()))), acc);
+                                            user.getAccount().transferFund(Double.parseDouble(String.format("%.2f", Double.parseDouble(amountPerson.getText().toString()))), acc);
                                             amountPerson.setText("");
                                             toAccountNum.setText("");
                                             contactNameSave.setText("");
-                                            availNum.setText(String.format("%.2f",user.getAccounts().get(0).getBalance()));
+                                            availNum.setText(String.format("%.2f",user.getAccount().getBalance()));
                                         }
                                         else{
                                             AlertDialog alertDialog = new AlertDialog.Builder(PayPersonActivity.this).create();
@@ -90,15 +94,15 @@ public class PayPersonActivity extends ActionBarActivity {
 
                     }
                     else{
-                        if(user.getAccounts().get(0).getBalance()-Double.parseDouble(amountPerson.getText().toString())>=0) {
+                        if(user.getAccount().getBalance()-Double.parseDouble(amountPerson.getText().toString())>=0) {
                             Account acc = new Account(Integer.parseInt(toAccountNum.getText().toString()), 500, 10000);
                             Contact newContact = new Contact(contactNameSave.getText().toString(), acc);
                             user.addContact(newContact);
-                            user.getAccounts().get(0).transferFund(Double.parseDouble(String.format("%.2f", Double.parseDouble(amountPerson.getText().toString()))), acc);
+                            user.getAccount().transferFund(Double.parseDouble(String.format("%.2f", Double.parseDouble(amountPerson.getText().toString()))), acc);
                             amountPerson.setText("");
                             toAccountNum.setText("");
                             contactNameSave.setText("");
-                            availNum.setText(String.format("%.2f",user.getAccounts().get(0).getBalance()));
+                            availNum.setText(String.format("%.2f",user.getAccount().getBalance()));
                         }
                         else{
                             AlertDialog alertDialog = new AlertDialog.Builder(PayPersonActivity.this).create();
@@ -151,6 +155,8 @@ public class PayPersonActivity extends ActionBarActivity {
                 finish();
             }
         });
+
+        new AsyncCaller().execute();
     }
 
 
@@ -196,5 +202,24 @@ public class PayPersonActivity extends ActionBarActivity {
                 finish();
             }
         }
+    }
+
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        Log.i("USER", "Something happened");
+        MainActivity.getTimeCounter().resetTimer();
+    }
+
+    private class AsyncCaller extends AsyncTask<Void, Void, Void>
+    {
+        protected Void doInBackground(Void... params) {
+            //If user idle for 60 seconds log him out
+            while(MainActivity.getTimeCounter().countTime()<60000){}
+            finish();
+
+            return null;
+        }
+
     }
 }

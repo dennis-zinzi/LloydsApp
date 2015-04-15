@@ -26,14 +26,14 @@ public class TabbedPageAdapter extends FragmentPagerAdapter {
                 // Balance fragment
                 return new BalanceFragment();
             case 1:
-                // Transfer fragment
-                return new TransferFragment();
+                // Banking fragment
+                return new BankingFragment();
             case 2:
                 // Wallets fragment
                 return new WalletFragment();
             case 3:
-                // Banking fragment
-                return new BankingFragment();
+                // Transfer fragment
+                return new TransferFragment();
         }
 
         return null;

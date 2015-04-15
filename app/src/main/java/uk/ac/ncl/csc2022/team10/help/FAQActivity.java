@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +19,7 @@ import java.io.*;
 import java.util.*;
 
 import uk.ac.ncl.csc2022.team10.lloydsapp.HelpActivity;
+import uk.ac.ncl.csc2022.team10.lloydsapp.MainActivity;
 import uk.ac.ncl.csc2022.team10.lloydsapp.R;
 import uk.ac.ncl.csc2022.team10.lloydsapp.SettingsActivity;
 
@@ -61,6 +63,8 @@ public class FAQActivity extends ActionBarActivity {
                 alertDialog.show();
             }
         });
+
+        new AsyncCaller().execute();
     }
 
 
@@ -146,5 +150,24 @@ public class FAQActivity extends ActionBarActivity {
         answerList.add(a5);
     }
 
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        Log.i("USER", "Something happened");
+        MainActivity.getTimeCounter().resetTimer();
+    }
+
+    private class AsyncCaller extends AsyncTask<Void, Void, Void>
+    {
+        protected Void doInBackground(Void... params) {
+            //If user idle for 60 seconds log him out
+            while(MainActivity.getTimeCounter().countTime()<60000){}
+            setResult(2);
+            finish();
+
+            return null;
+        }
+
+    }
 
 }

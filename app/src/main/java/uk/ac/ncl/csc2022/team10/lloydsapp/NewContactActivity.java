@@ -4,8 +4,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -80,6 +82,8 @@ public class NewContactActivity extends ActionBarActivity {
             }
         });
 
+        new AsyncCaller().execute();
+
     }
 
 
@@ -125,5 +129,24 @@ public class NewContactActivity extends ActionBarActivity {
                 finish();
             }
         }
+    }
+
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        Log.i("USER", "Something happened");
+        MainActivity.getTimeCounter().resetTimer();
+    }
+
+    private class AsyncCaller extends AsyncTask<Void, Void, Void>
+    {
+        protected Void doInBackground(Void... params) {
+            //If user idle for 60 seconds log him out
+            while(MainActivity.getTimeCounter().countTime()<60000){}
+            finish();
+
+            return null;
+        }
+
     }
 }

@@ -9,23 +9,26 @@ public class User {
     private String birthday;
     private String address;
     private String password;
-    private List<Account> accounts;
+    private Account account;
     private List<Budget> budgets;
     private List<Contact> contacts;
     private List<Wallet> wallets;
 
 
-    public User(String name, String userID){
+    public User(String name, String userID, Account account){
         this.name = name;
         this.userID = userID;
         budgets = new ArrayList<Budget>();
+        this.account = account;
         contacts = new ArrayList<Contact>();
-        accounts = new ArrayList<Account>();
+        wallets = new ArrayList<Wallet>();
     }
 
     public void addBudget(Budget b){
         budgets.add(b);
     }
+
+    public void addWallet(Wallet w){ wallets.add(w); }
 
     public String getName() {
         return name;
@@ -55,9 +58,12 @@ public class User {
         this.password = password;
     }
 
+    public void setAccount(Account a){
+        account = a;
+    }
 
-    public List<Account> getAccounts() {
-        return accounts;
+    public Account getAccount() {
+        return account;
     }
 
     public List<Budget> getBudgets(){
@@ -72,8 +78,10 @@ public class User {
         contacts.add(c);
     }
 
-    public void addAccount(Account a){
-        accounts.add(a);
-    }
+    public List<Wallet> getWallets(){ return wallets; }
+
+    //public void addAccount(Account a){
+      //  accounts.add(a);
+    //}
 
 }

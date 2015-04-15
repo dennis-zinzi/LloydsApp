@@ -12,7 +12,7 @@ import uk.ac.ncl.csc2022.team10.datatypes.User;
 
 public class WalletFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
-    private User u;
+    private User user;
 
     public static WalletFragment newInstance(int sectionNumber) {
         WalletFragment fragment = new WalletFragment();
@@ -22,7 +22,6 @@ public class WalletFragment extends Fragment {
         return fragment;
     }
     public WalletFragment() {
-        u = MainActivity.getUser();
     }
 
     @Override
@@ -30,6 +29,8 @@ public class WalletFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_wallet, container,
                 false);
+
+        user = MainActivity.getUser();
 
         return rootView;
     }

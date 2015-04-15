@@ -124,6 +124,10 @@
             android:name="uk.ac.ncl.csc2022.team10.help.ContactUsActivity"
             android:label="@string/title_activity_contact_us" >
         </activity>
+        <activity
+            android:name="uk.ac.ncl.csc2022.team10.help.ProductInfoActivity"
+            android:label="@string/title_activity_product_info" >
+        </activity>
     </application>
 
 </manifest>

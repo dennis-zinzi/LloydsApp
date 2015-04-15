@@ -10,6 +10,7 @@ import uk.ac.ncl.csc2022.team10.dialogs.ContactDialog;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -55,7 +56,7 @@ public class TransferFragment extends Fragment {
                 false);
 
         balanceLabel = (TextView)rootView.findViewById(R.id.availBalance);
-        balanceLabel.setText(String.format("%.2f",user.getAccounts().get(0).getBalance()));
+        balanceLabel.setText(String.format("%.2f",user.getAccount().getBalance()));
         amountBox = (EditText)rootView.findViewById(R.id.amountBox);
         toContact = (EditText)rootView.findViewById(R.id.toContact);
         addContact = (ImageButton)rootView.findViewById(R.id.addContact);
@@ -76,12 +77,12 @@ public class TransferFragment extends Fragment {
             public void onClick(View v){
                 if(!amountBox.getText().toString().equals("") && selectedContact != null) {
                     //Check if enough funds to make transfer
-                    if(user.getAccounts().get(0).getBalance()-Double.parseDouble(amountBox.getText().toString())>=0) {
+                    if(user.getAccount().getBalance()-Double.parseDouble(amountBox.getText().toString())>=0) {
                         //Transfers inputted money to selected account
-                        user.getAccounts().get(0).transferFund(Double.parseDouble(String.format("%.2f",Double.parseDouble(amountBox.getText().toString()))), selectedContact.getAccount());
+                        user.getAccount().transferFund(Double.parseDouble(String.format("%.2f",Double.parseDouble(amountBox.getText().toString()))), selectedContact.getAccount());
                         Log.i("TRANSFERED", Double.parseDouble(amountBox.getText().toString()) + "to " + selectedContact.getName());
                         //Update balance label
-                        balanceLabel.setText(String.format("%.2f",user.getAccounts().get(0).getBalance()));
+                        balanceLabel.setText(String.format("%.2f",user.getAccount().getBalance()));
                     }
                     else{
                         AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
@@ -146,6 +147,19 @@ public class TransferFragment extends Fragment {
 
     public static void setSelectedContact(Contact c){
         selectedContact = c;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // If requestCode of parent equals 2 and resultCode of child is 1, then
+        // child requested to logout, thus MainActivity should finish
+        if (requestCode == 3) {
+            if (resultCode == 2) {
+                getActivity().setResult(1);
+                getActivity().finish();
+            }
+        }
     }
 
 //    @Override

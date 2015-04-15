@@ -30,6 +30,7 @@ import java.util.concurrent.ExecutionException;
 import uk.ac.ncl.csc2022.team10.datatypes.Account;
 import uk.ac.ncl.csc2022.team10.datatypes.Contact;
 import uk.ac.ncl.csc2022.team10.datatypes.User;
+import uk.ac.ncl.csc2022.team10.datatypes.Wallet;
 import uk.ac.ncl.csc2022.team10.encryption.Encryption;
 
 public class LoginActivity extends Activity implements OnClickListener {
@@ -81,27 +82,38 @@ public class LoginActivity extends Activity implements OnClickListener {
         loginButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    Integer result = asyncTask.execute().get();
-                    if (result == 1) {
-                        account = (EditText) findViewById(R.id.toContact);
-                        Log.i("MY SYSTEM", "All passed");
-                        makeUser("Den", account.getText().toString());
-                        MainActivity.setUser(user);
-                        startActivity(intent1);
-                    } else {
-                        Log.i("MY SYSTEM", "BAD");
+                    try {
+                        Integer result = asyncTask.execute().get();
+                        if (result == 1) {
+                            account = (EditText) findViewById(R.id.toContact);
+                            Log.i("MY SYSTEM", "All passed");
+                            makeUser("Den", account.getText().toString());
+                            MainActivity.setUser(user);
+                            startActivity(intent1);
+                        } else {
+                            Log.i("MY SYSTEM", "BAD");
+                            new AlertDialog.Builder(context)
+                                    .setTitle("Something wrong")
+                                    .setMessage("Please check your details and try again")
+                                    .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.cancel();
+                                        }
+                                    })
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .show();
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
                     }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
                 }
-            }
 
-        });
+            });
 
-        exitButton.setOnClickListener(new OnClickListener() {
+
+            exitButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                     /* Exit app */
@@ -118,9 +130,12 @@ public class LoginActivity extends Activity implements OnClickListener {
     }
 
     public void makeUser(String name,String userId){
-        user = new User(name, userId);
         Account a = new Account(1,10000,1000);
-        user.addAccount(a);
+        user = new User(name, userId,a);
+        Wallet phone = new Wallet("Phone", 2.5);
+        Wallet google = new Wallet("Google", 5);
+        user.addWallet(phone);
+        user.addWallet(google);
         user.addContact(new Contact("Tom",new Account(2,50,1000)));
         user.addContact(new Contact("Sanzhar",new Account(3,190,5000)));
         user.addContact(new Contact("Rhys",new Account(4,500,10000)));

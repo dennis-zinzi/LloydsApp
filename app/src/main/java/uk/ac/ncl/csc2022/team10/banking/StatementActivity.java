@@ -3,8 +3,10 @@ package uk.ac.ncl.csc2022.team10.banking;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -39,8 +41,10 @@ public class StatementActivity extends ActionBarActivity {
         user = MainActivity.getUser();
         getTransactionList();
 
+        setTitle("Statement");
+
         balanceNum = (TextView)findViewById(R.id.balanceNum);
-        balanceNum.setText(String.format("%.2f",user.getAccounts().get(0).getBalance()));
+        balanceNum.setText(String.format("%.2f",user.getAccount().getBalance()));
 
         statementList = (ListView)findViewById(R.id.statementList);
 
@@ -52,6 +56,8 @@ public class StatementActivity extends ActionBarActivity {
 
         //banks.add("TSB Heaton");
         transactionList.notifyDataSetChanged();
+
+        new AsyncCaller().execute();
     }
 
 
@@ -86,7 +92,7 @@ public class StatementActivity extends ActionBarActivity {
     }
 
     public void getTransactionList(){
-        transactions = user.getAccounts().get(0).getTransaction();
+        transactions = user.getAccount().getTransaction();
         transactionString = new ArrayList<String>();
 
         for (Transaction t : transactions) {
@@ -106,5 +112,24 @@ public class StatementActivity extends ActionBarActivity {
                 finish();
             }
         }
+    }
+
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        Log.i("USER", "Something happened");
+        MainActivity.getTimeCounter().resetTimer();
+    }
+
+    private class AsyncCaller extends AsyncTask<Void, Void, Void>
+    {
+        protected Void doInBackground(Void... params) {
+            //If user idle for 60 seconds log him out
+            while(MainActivity.getTimeCounter().countTime()<60000){}
+            finish();
+
+            return null;
+        }
+
     }
 }

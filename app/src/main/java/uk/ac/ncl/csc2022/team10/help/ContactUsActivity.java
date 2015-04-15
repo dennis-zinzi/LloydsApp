@@ -3,8 +3,10 @@ package uk.ac.ncl.csc2022.team10.help;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import uk.ac.ncl.csc2022.team10.lloydsapp.HelpActivity;
+import uk.ac.ncl.csc2022.team10.lloydsapp.MainActivity;
 import uk.ac.ncl.csc2022.team10.lloydsapp.R;
 import uk.ac.ncl.csc2022.team10.lloydsapp.SettingsActivity;
 
@@ -75,6 +78,8 @@ public class ContactUsActivity extends ActionBarActivity {
                 return false;
             }
         });
+
+        new AsyncCaller().execute();
     }
 
 
@@ -106,5 +111,25 @@ public class ContactUsActivity extends ActionBarActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        Log.i("USER", "Something happened");
+        MainActivity.getTimeCounter().resetTimer();
+    }
+
+    private class AsyncCaller extends AsyncTask<Void, Void, Void>
+    {
+        protected Void doInBackground(Void... params) {
+            //If user idle for 60 seconds log him out
+            while(MainActivity.getTimeCounter().countTime()<60000){}
+            setResult(2);
+            finish();
+
+            return null;
+        }
+
     }
 }

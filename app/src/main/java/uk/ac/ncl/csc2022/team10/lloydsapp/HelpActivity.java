@@ -3,10 +3,12 @@ package uk.ac.ncl.csc2022.team10.lloydsapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 //import android.support.v4.app.Fragment;
 //import android.view.LayoutInflater;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -81,6 +83,8 @@ public class HelpActivity extends ActionBarActivity implements OnClickListener {
                 startActivityForResult(intent,3);
             }
         });
+
+        new AsyncCaller().execute();
     }
 
     @Override
@@ -125,6 +129,26 @@ public class HelpActivity extends ActionBarActivity implements OnClickListener {
 
     @Override
     public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        Log.i("USER", "Something happened");
+        MainActivity.getTimeCounter().resetTimer();
+    }
+
+    private class AsyncCaller extends AsyncTask<Void, Void, Void>
+    {
+        protected Void doInBackground(Void... params) {
+            //If user idle for 60 seconds log him out
+            while(MainActivity.getTimeCounter().countTime()<60000){}
+            setResult(1);
+            finish();
+
+            return null;
+        }
 
     }
 }

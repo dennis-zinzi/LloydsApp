@@ -56,8 +56,8 @@ public class BalanceFragment extends Fragment {
         addToBudget = (Button)rootView.findViewById(R.id.addToBudget);
         manageBudgets = (Button)rootView.findViewById(R.id.budgetManage);
 
-        balanceLabel.setText(String.format("%.2f",user.getAccounts().get(0).getBalance()));
-        overdraftLabel.setText(String.format("%.2f",user.getAccounts().get(0).getOverdraftLimit()));
+        balanceLabel.setText(String.format("%.2f",user.getAccount().getBalance()));
+        overdraftLabel.setText(String.format("%.2f",user.getAccount().getOverdraftLimit()));
 
         //Just code to learn/test creation of xml elements dynamically, will change it appropriately later
         addToBudget.setOnClickListener(new OnClickListener() {
