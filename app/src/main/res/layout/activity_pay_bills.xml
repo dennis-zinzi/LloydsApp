@@ -34,7 +34,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Email:"
         android:id="@+id/textView10"
-        android:layout_marginTop="53dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/textView_payBills_note"
         android:layout_toLeftOf="@+id/textView_payBills"
         android:layout_toStartOf="@+id/textView_payBills" />

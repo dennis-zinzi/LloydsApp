@@ -39,7 +39,7 @@ public class TopUpActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.i("TopUp", "onCreate is called");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_activity_top_up);
+        setContentView(R.layout.activity_top_up);
         Bundle b = getIntent().getExtras();
         walletsName = b.getString("name");
         balance = b.getDouble("balance1");
@@ -67,6 +67,7 @@ public class TopUpActivity extends ActionBarActivity {
                 //startActivity(intent1);
                 Log.i("TopUp", "button is clicked");
                 MainActivity.setNewWalletBalance(walletsName, Double.parseDouble(amountTopUp.getText().toString()));
+                MainActivity.getUser().getAccount().transferFund(Double.parseDouble(amountTopUp.getText().toString()), MainActivity.getUser().getAccount());
                 new AlertDialog.Builder(context)
                         .setTitle("Well done")
                         .setMessage("Your balance has been updated")

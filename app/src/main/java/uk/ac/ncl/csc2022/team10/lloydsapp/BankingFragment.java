@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import uk.ac.ncl.csc2022.team10.banking.PayBills;
 import uk.ac.ncl.csc2022.team10.banking.PayPersonActivity;
+import uk.ac.ncl.csc2022.team10.banking.StandingOrders;
 import uk.ac.ncl.csc2022.team10.banking.StatementActivity;
 import uk.ac.ncl.csc2022.team10.datatypes.User;
 
@@ -43,6 +44,7 @@ public class BankingFragment extends Fragment {
         viewStatement = (Button) rootView.findViewById(R.id.topUp_button);
         payPerson = (Button) rootView.findViewById(R.id.payPerson);
         payBills = (Button) rootView.findViewById(R.id.payBills);
+        standingOrders=(Button) rootView.findViewById(R.id.standingOrders);
         viewStatement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,6 +65,13 @@ public class BankingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), PayBills.class);
+                startActivity(intent);
+            }
+        });
+        standingOrders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), StandingOrders.class);
                 startActivity(intent);
             }
         });

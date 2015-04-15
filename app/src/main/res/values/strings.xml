@@ -31,7 +31,7 @@
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
     <string name="pay_bills_note">Please note that bank needs 7 working days to transfer money to another account. Your entered details will be viewed by our team and we will contact you by email.</string>
-
+<string name="standing_orders_note">You currently have no standing orders. To set it up please go online or contact your nearest branch.</string>
     <color name="lloyds_green">#115842</color>
 
     <string name="title_activity_base">BaseActivity</string>
@@ -60,5 +60,6 @@
     <string name="title_activity_activity_top_up">activity_top_up</string>
     <string name="title_activity_activity_redeem">activity_redeem</string>
     <string name="title_activity_pay_bills">PayBills</string>
+    <string name="title_activity_standing_orders">StandingOrders</string>
 
 </resources>
