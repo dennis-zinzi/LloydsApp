@@ -105,11 +105,16 @@ public class LoginActivity extends Activity implements OnClickListener {
                                     .setMessage("Please check your details and try again")
                                     .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
+                                            Intent intent = new Intent(LoginActivity.this,
+                                                    LoginActivity.class);
+
+                                            startActivity(intent);
                                             dialog.cancel();
                                         }
                                     })
                                     .setIcon(android.R.drawable.ic_dialog_alert)
                                     .show();
+
                         }
                     } catch (InterruptedException e) {
                         e.printStackTrace();
