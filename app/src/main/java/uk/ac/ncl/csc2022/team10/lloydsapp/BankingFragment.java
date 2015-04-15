@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import uk.ac.ncl.csc2022.team10.banking.PayBills;
 import uk.ac.ncl.csc2022.team10.banking.PayPersonActivity;
 import uk.ac.ncl.csc2022.team10.banking.StatementActivity;
 import uk.ac.ncl.csc2022.team10.datatypes.User;
@@ -28,6 +29,7 @@ public class BankingFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     public BankingFragment() {
         user = MainActivity.getUser();
     }
@@ -38,13 +40,13 @@ public class BankingFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_banking, container,
                 false);
 
-        viewStatement = (Button)rootView.findViewById(R.id.topUp_button);
-        payPerson = (Button)rootView.findViewById(R.id.payPerson);
-
+        viewStatement = (Button) rootView.findViewById(R.id.topUp_button);
+        payPerson = (Button) rootView.findViewById(R.id.payPerson);
+        payBills = (Button) rootView.findViewById(R.id.payBills);
         viewStatement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),StatementActivity.class);
+                Intent intent = new Intent(getActivity(), StatementActivity.class);
                 startActivity(intent);
             }
         });
@@ -57,12 +59,14 @@ public class BankingFragment extends Fragment {
             }
         });
 
+        payBills.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), PayBills.class);
+                startActivity(intent);
+            }
+        });
         return rootView;
     }
-//    @Override
-//    public void onAttach(Activity activity) {
-//        super.onAttach(activity);
-//        ((MainActivity) activity).onSectionAttached(getArguments().getInt(
-//                ARG_SECTION_NUMBER));
-//    }
+
 }
