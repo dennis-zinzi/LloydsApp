@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 
+import uk.ac.ncl.csc2022.team10.help.ContactUsActivity;
 import uk.ac.ncl.csc2022.team10.help.FAQActivity;
 import uk.ac.ncl.csc2022.team10.locationmanager.LocateMapActivity;
 
@@ -21,6 +22,7 @@ public class HelpActivity extends ActionBarActivity implements OnClickListener {
     Button nearestBranch;
     Button productInfo;
     Button faq;
+    Button contactUs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,15 @@ public class HelpActivity extends ActionBarActivity implements OnClickListener {
             public void onClick(View v) {
                 //Goes to FAQ page
                 Intent intent = new Intent(context, FAQActivity.class);
+                startActivityForResult(intent,3);
+            }
+        });
+
+        contactUs = (Button)findViewById(R.id.contactUs);
+        contactUs.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ContactUsActivity.class);
                 startActivityForResult(intent,3);
             }
         });

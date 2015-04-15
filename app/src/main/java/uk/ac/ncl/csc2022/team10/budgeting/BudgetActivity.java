@@ -2,29 +2,29 @@ package uk.ac.ncl.csc2022.team10.budgeting;
 
 
 
-        import java.util.ArrayList;
+import java.util.ArrayList;
 
-        import android.app.Activity;
-        import android.app.AlertDialog;
-        import android.content.DialogInterface;
-        import android.content.pm.ActivityInfo;
-        import android.graphics.Color;
-        import android.os.Bundle;
-        import android.util.TypedValue;
-        import android.view.Gravity;
-        import android.view.Menu;
-        import android.view.View;
-        import android.view.View.OnLongClickListener;
-        import android.widget.Button;
-        import android.widget.EditText;
-        import android.widget.LinearLayout;
-        import android.widget.LinearLayout.LayoutParams;
-        import android.widget.ProgressBar;
-        import android.widget.ScrollView;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnLongClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-        import uk.ac.ncl.csc2022.team10.lloydsapp.R;
+import uk.ac.ncl.csc2022.team10.lloydsapp.R;
 
 
 public class BudgetActivity extends Activity {

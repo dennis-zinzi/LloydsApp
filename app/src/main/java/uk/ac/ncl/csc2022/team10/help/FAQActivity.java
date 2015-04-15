@@ -2,6 +2,7 @@ package uk.ac.ncl.csc2022.team10.help;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -11,13 +12,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.io.*;
 import java.util.*;
 
+import uk.ac.ncl.csc2022.team10.lloydsapp.HelpActivity;
 import uk.ac.ncl.csc2022.team10.lloydsapp.R;
+import uk.ac.ncl.csc2022.team10.lloydsapp.SettingsActivity;
 
 public class FAQActivity extends ActionBarActivity {
 
@@ -31,6 +33,8 @@ public class FAQActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_faq);
+
+        setTitle("FAQs");
 
         faqQuestionList = (ListView) findViewById(R.id.faqQuestionsList);
         questionList = new ArrayList<String>();
@@ -73,12 +77,20 @@ public class FAQActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent i = new Intent(this,SettingsActivity.class);
+            startActivity(i);
             return true;
         }
-
+        else if(id == R.id.action_help){
+            Intent i = new Intent(this,HelpActivity.class);
+            startActivity(i);
+            return true;
+        }
+        else if(id == R.id.action_logout){
+            setResult(2);
+            finish();
+        }
         return super.onOptionsItemSelected(item);
     }
 
