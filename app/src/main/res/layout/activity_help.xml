@@ -11,7 +11,7 @@
     tools:context="uk.ac.ncl.csc2022.team10.lloydsapp.HelpActivity" >
 
     <Button
-        android:id="@+id/faq"
+        android:id="@+id/topUp_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -24,14 +24,14 @@
         android:id="@+id/productInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/nearestBranch"
+        android:layout_below="@+id/button_redeem1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:text="Product Information"
         android:width="200dp" />
 
     <Button
-        android:id="@+id/nearestBranch"
+        android:id="@+id/button_redeem1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Find Nearest Branch"
@@ -41,11 +41,11 @@
         android:layout_alignStart="@+id/productInfo" />
 
     <Button
-        android:id="@+id/contactUs"
+        android:id="@+id/button_deposit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/nearestBranch"
-        android:layout_below="@+id/faq"
+        android:layout_alignLeft="@+id/button_redeem1"
+        android:layout_below="@+id/topUp_button"
         android:layout_marginTop="39dp"
         android:text="Contact Us"
         android:width="200dp" />

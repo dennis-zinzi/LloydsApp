@@ -38,7 +38,7 @@ public class BankingFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_banking, container,
                 false);
 
-        viewStatement = (Button)rootView.findViewById(R.id.faq);
+        viewStatement = (Button)rootView.findViewById(R.id.topUp_button);
         payPerson = (Button)rootView.findViewById(R.id.payPerson);
 
         viewStatement.setOnClickListener(new View.OnClickListener() {

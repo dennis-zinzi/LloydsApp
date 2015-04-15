@@ -40,7 +40,7 @@ public class HelpActivity extends ActionBarActivity implements OnClickListener {
         final Context context = this;
 
         //Determine button to add listener to
-        nearestBranch = (Button) findViewById(R.id.nearestBranch);
+        nearestBranch = (Button) findViewById(R.id.button_redeem1);
         nearestBranch.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -65,7 +65,7 @@ public class HelpActivity extends ActionBarActivity implements OnClickListener {
             }
         });
 
-        faq = (Button)findViewById(R.id.faq);
+        faq = (Button)findViewById(R.id.topUp_button);
         faq.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +75,7 @@ public class HelpActivity extends ActionBarActivity implements OnClickListener {
             }
         });
 
-        contactUs = (Button)findViewById(R.id.contactUs);
+        contactUs = (Button)findViewById(R.id.button_deposit);
         contactUs.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

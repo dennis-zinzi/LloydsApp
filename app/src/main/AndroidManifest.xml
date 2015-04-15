@@ -128,6 +128,14 @@
             android:name="uk.ac.ncl.csc2022.team10.help.ProductInfoActivity"
             android:label="@string/title_activity_product_info" >
         </activity>
+        <activity
+            android:name="uk.ac.ncl.csc2022.team10.banking.TopUpActivity"
+            android:label="@string/title_activity_activity_top_up" >
+        </activity>
+        <activity
+            android:name=".activity_redeem"
+            android:label="@string/title_activity_activity_redeem" >
+        </activity>
     </application>
 
 </manifest>

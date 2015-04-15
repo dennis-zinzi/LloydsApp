@@ -56,5 +56,7 @@
     <string name="title_activity_faq">FAQActivity</string>
     <string name="title_activity_contact_us">ContactUsActivity</string>
     <string name="title_activity_product_info">ProductInfoActivity</string>
+    <string name="title_activity_activity_top_up">activity_top_up</string>
+    <string name="title_activity_activity_redeem">activity_redeem</string>
 
 </resources>

@@ -40,13 +40,17 @@ public class LoginActivity extends Activity implements OnClickListener {
     private EditText account;
     private EditText password;
     private final static String USER_AGENT = "Mozilla/5.0";
-    private User user;
+    private static User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_login);
+        account = (EditText) findViewById(R.id.toContact);
+        password = (EditText) findViewById(R.id.editText3);
+        password.setText("hello1");
+        account.setText("12345");
         addListenerOnButton();
     }
 
@@ -87,9 +91,13 @@ public class LoginActivity extends Activity implements OnClickListener {
                         if (result == 1) {
                             account = (EditText) findViewById(R.id.toContact);
                             Log.i("MY SYSTEM", "All passed");
-                            makeUser("Den", account.getText().toString());
+                            Account a = new Account(1, 10000, 1000);
+                            user = new User("Dennis", "123456", a);
                             MainActivity.setUser(user);
+                            MainActivity.setWallets();
+                            MainActivity.setPoints();
                             startActivity(intent1);
+
                         } else {
                             Log.i("MY SYSTEM", "BAD");
                             new AlertDialog.Builder(context)
@@ -128,20 +136,6 @@ public class LoginActivity extends Activity implements OnClickListener {
     public void onClick(View v) {
 
     }
-
-    public void makeUser(String name,String userId){
-        Account a = new Account(1,10000,1000);
-        user = new User(name, userId,a);
-        Wallet phone = new Wallet("Phone", 2.5);
-        Wallet google = new Wallet("Google", 5);
-        user.addWallet(phone);
-        user.addWallet(google);
-        user.addContact(new Contact("Tom",new Account(2,50,1000)));
-        user.addContact(new Contact("Sanzhar",new Account(3,190,5000)));
-        user.addContact(new Contact("Rhys",new Account(4,500,10000)));
-        user.addContact(new Contact("Ashley",new Account(5,300,100)));
-    }
-
 
     private class MyAsyncTask extends AsyncTask<String, Void, Integer> {
         /** Essential data types **/

@@ -1,0 +1,87 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="uk.ac.ncl.csc2022.team10.banking.TopUpActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Top Up Your Wallet"
+        android:id="@+id/textView_TopUp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WalletName"
+        android:id="@+id/textView_Wallet"
+        android:layout_below="@+id/textView_TopUp"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Current Balance:"
+        android:id="@+id/textView_CurrentBalance"
+        android:layout_marginTop="49dp"
+        android:layout_below="@+id/textView_Wallet"
+        android:layout_toLeftOf="@+id/textView_Wallet"
+        android:layout_toStartOf="@+id/textView_Wallet" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="0.0"
+        android:id="@+id/textView_CurrentBalanceDisplay"
+        android:layout_alignTop="@+id/textView_CurrentBalance"
+        android:layout_alignRight="@+id/textView_TopUp"
+        android:layout_alignEnd="@+id/textView_TopUp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Top Up Amount:"
+        android:id="@+id/textView_TopUpAmount"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/textView_CurrentBalance"
+        android:layout_alignRight="@+id/textView_CurrentBalance"
+        android:layout_alignEnd="@+id/textView_CurrentBalance" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editText_TopUp"
+        android:layout_alignTop="@+id/textView_TopUpAmount"
+        android:layout_toRightOf="@+id/textView_TopUpAmount"
+        android:layout_toEndOf="@+id/textView_TopUpAmount"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Top Up"
+        android:id="@+id/button_topUp"
+        android:layout_marginTop="143dp"
+        android:layout_below="@+id/editText_TopUp"
+        android:layout_toRightOf="@+id/textView_Wallet"
+        android:layout_toEndOf="@+id/textView_Wallet" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done"
+        android:id="@+id/button_close"
+        android:layout_alignTop="@+id/button_topUp"
+        android:layout_toLeftOf="@+id/editText_TopUp"
+        android:layout_toStartOf="@+id/editText_TopUp" />
+</RelativeLayout>

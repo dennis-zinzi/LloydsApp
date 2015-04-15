@@ -1,6 +1,7 @@
 package uk.ac.ncl.csc2022.team10.lloydsapp;
 
 //import android.os.Build;
+
 import java.io.IOException;
 import java.util.Timer;
 
@@ -19,6 +20,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import uk.ac.ncl.csc2022.team10.datatypes.*;
@@ -36,6 +38,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     private static TimeCounter timeCounter;
 
     private static User user;
+
     /*Notifications*/
     GoogleCloudMessaging gcm;
     String regid;
@@ -69,8 +72,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             }
         }.execute(null, null, null);
     }
-
-	/* End of notifications */
+    /* End of notifications */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,6 +170,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     public void makeUserExample() {
         Account a = new Account(1, 100, 1000);
         user = new User("Dennis", "123456", a);
+
         user.addContact(new Contact("Tom", new Account(2, 50, 1000)));
         user.addContact(new Contact("Sanzhar", new Account(3, 190, 5000)));
         user.addContact(new Contact("Rhys", new Account(4, 500, 10000)));
@@ -204,11 +207,32 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         user = u;
     }
 
-    private class AsyncCaller extends AsyncTask<Void, Void, Void>
-    {
+    public static void setWallets() {
+        user.addWallet(new Wallet("Google", 5.5));
+        user.addWallet(new Wallet("Phone", 4.5));
+    }
+
+    public static void setPoints(){
+        user.addPoint(new Points(5.0));
+        user.addPoint(new Points(1.5));
+    }
+
+    public static void setNewWalletBalance(String name, double amount) {
+        Log.i("MainActivity", "setNewWalletBalance with " + name + " " + amount);
+        user.getWalletByName(name).setBalance(amount);
+    }
+
+    public static void redeemNectar(){
+        user.getPoints().get(0).setPoints(0);
+    }
+    public static void redeemLloyds(){
+        user.getPoints().get(1).setPoints(0);
+    }
+    private class AsyncCaller extends AsyncTask<Void, Void, Void> {
         protected Void doInBackground(Void... params) {
             //If user idle for 60 seconds log him out
-            while(timeCounter.countTime()<60000){}
+            while (timeCounter.countTime() < 60000) {
+            }
             finish();
 
             return null;
@@ -216,7 +240,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
     }
 
-    public static TimeCounter getTimeCounter(){
+    public static TimeCounter getTimeCounter() {
         return timeCounter;
     }
 }
