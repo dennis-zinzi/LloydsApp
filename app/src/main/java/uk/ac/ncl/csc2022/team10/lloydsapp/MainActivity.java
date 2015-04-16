@@ -87,6 +87,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         //makeUserExample();
         timeCounter = new TimeCounter();
 
+
         mAdapter = new TabbedPageAdapter(getSupportFragmentManager());
 
         viewPager.setAdapter(mAdapter);
