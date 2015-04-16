@@ -2,6 +2,7 @@ package uk.ac.ncl.csc2022.team10.datatypes;
 
 /**
  * Created by Dennis on 7/3/15.
+ * Edited by Rhys Covell
  */
 
 public class Budget {
@@ -18,10 +19,6 @@ public class Budget {
         this.name = name;
         this.limit = limit;
         current = 0;
-    }
-
-    public void addToBudget(double amount){
-        limit += amount;
     }
 
 
@@ -46,11 +43,17 @@ public class Budget {
         return name;
     }
 
+    public void setName(String newName){ name = newName;}
+
     public double getCurrentSpend(){ return current; }
+
+    public void setCurrentSpend(Double spend){ current = spend; }
 
     public double getLimit(){
         return limit;
     }
+
+    public void setLimit(Double newLim){ limit = newLim;}
 
     public String[] getTypes(){
         return types;
