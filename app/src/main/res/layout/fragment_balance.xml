@@ -40,14 +40,14 @@
         android:id="@+id/overdraftText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView12"
-        android:layout_alignBottom="@+id/textView12"
+        android:layout_alignBaseline="@+id/textView_LloydsPoints"
+        android:layout_alignBottom="@+id/textView_LloydsPoints"
         android:layout_alignRight="@+id/balanceText"
         android:text="1000.00"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/textView_NectarPoints"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/textView11"
@@ -112,7 +112,7 @@
         android:text="Add To Budget" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/textView_LloydsPoints"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView8"

@@ -30,6 +30,7 @@ import java.util.concurrent.ExecutionException;
 import uk.ac.ncl.csc2022.team10.datatypes.Account;
 import uk.ac.ncl.csc2022.team10.datatypes.Contact;
 import uk.ac.ncl.csc2022.team10.datatypes.User;
+import uk.ac.ncl.csc2022.team10.datatypes.Wallet;
 import uk.ac.ncl.csc2022.team10.encryption.Encryption;
 
 public class LoginActivity extends Activity implements OnClickListener {
@@ -39,14 +40,21 @@ public class LoginActivity extends Activity implements OnClickListener {
     private EditText account;
     private EditText password;
     private final static String USER_AGENT = "Mozilla/5.0";
-    private static User u;
+    private static User user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i("Login", "On create");
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_login);
+        account = (EditText) findViewById(R.id.toContact);
+        password = (EditText) findViewById(R.id.editText3);
+        password.setText("hello1");
+        account.setText("12345");
         addListenerOnButton();
+
     }
 
     @Override
@@ -72,7 +80,7 @@ public class LoginActivity extends Activity implements OnClickListener {
     public void addListenerOnButton() {
         final Context context = this;
         final Intent intent1 = new Intent(this, MainActivity.class);
-        final MyAsyncTask asyncTask = new MyAsyncTask();
+
 
         loginButton = (Button) findViewById(R.id.login);
         exitButton = (Button) findViewById(R.id.exit);
@@ -82,14 +90,39 @@ public class LoginActivity extends Activity implements OnClickListener {
             @Override
             public void onClick(View v) {
                 try {
+                    MyAsyncTask asyncTask;
+                    asyncTask = new MyAsyncTask();
+
                     Integer result = asyncTask.execute().get();
                     if (result == 1) {
                         account = (EditText) findViewById(R.id.toContact);
                         Log.i("MY SYSTEM", "All passed");
-                        makeUserExample("Den", account.getText().toString());
+                        Account a = new Account(1, 10000, 1000);
+                        user = new User("Dennis", "123456", a);
+                        MainActivity.setUser(user);
+                        MainActivity.setWallets();
+                        MainActivity.setPoints();
+
                         startActivity(intent1);
+                        asyncTask.cancel(true);
+
                     } else {
                         Log.i("MY SYSTEM", "BAD");
+                        new AlertDialog.Builder(context)
+                                .setTitle("Something wrong")
+                                .setMessage("Please check your details and try again")
+                                .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(LoginActivity.this,
+                                                LoginActivity.class);
+
+                                        startActivity(intent);
+                                        dialog.cancel();
+                                    }
+                                })
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .show();
+
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -99,6 +132,7 @@ public class LoginActivity extends Activity implements OnClickListener {
             }
 
         });
+
 
         exitButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -116,22 +150,10 @@ public class LoginActivity extends Activity implements OnClickListener {
 
     }
 
-    public void makeUserExample(String name,String userId){
-        u = new User(name, userId);
-        Account a = new Account(1,10000,1000);
-        u.addAccount(a);
-        u.addContact(new Contact("Tom",new Account(2,50,1000)));
-        u.addContact(new Contact("Sanzhar",new Account(3,190,5000)));
-        u.addContact(new Contact("Rhys",new Account(4,500,10000)));
-    }
-
-    public static User getUser(){
-        return u;
-    }
-
-
     private class MyAsyncTask extends AsyncTask<String, Void, Integer> {
-        /** Essential data types **/
+        /**
+         * Essential data types *
+         */
         private LoginActivity ac = new LoginActivity();
         private String enteredAccount;
         private String encrypted;

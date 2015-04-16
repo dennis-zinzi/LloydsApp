@@ -1,5 +1,6 @@
 package uk.ac.ncl.csc2022.team10.lloydsapp;
 
+import uk.ac.ncl.csc2022.team10.budgeting.BudgetActivity;
 import uk.ac.ncl.csc2022.team10.datatypes.*;
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,7 +39,7 @@ public class BalanceFragment extends Fragment {
 
     public BalanceFragment() {
         //user = MainActivity.getUser();
-        user = LoginActivity.getUser();
+        user = MainActivity.getUser();
     }
 
     @Override
@@ -55,8 +56,8 @@ public class BalanceFragment extends Fragment {
         addToBudget = (Button)rootView.findViewById(R.id.addToBudget);
         manageBudgets = (Button)rootView.findViewById(R.id.budgetManage);
 
-        balanceLabel.setText(String.format("%.2f",user.getAccounts().get(0).getBalance()));
-        overdraftLabel.setText(String.format("%.2f",user.getAccounts().get(0).getOverdraftLimit()));
+        balanceLabel.setText(String.format("%.2f",user.getAccount().getBalance()));
+        overdraftLabel.setText(String.format("%.2f",user.getAccount().getOverdraftLimit()));
 
         //Just code to learn/test creation of xml elements dynamically, will change it appropriately later
         addToBudget.setOnClickListener(new OnClickListener() {

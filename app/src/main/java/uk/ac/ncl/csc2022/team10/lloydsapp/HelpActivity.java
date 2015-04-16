@@ -3,22 +3,28 @@ package uk.ac.ncl.csc2022.team10.lloydsapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 //import android.support.v4.app.Fragment;
 //import android.view.LayoutInflater;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 
+import uk.ac.ncl.csc2022.team10.help.ContactUsActivity;
+import uk.ac.ncl.csc2022.team10.help.FAQActivity;
 import uk.ac.ncl.csc2022.team10.locationmanager.LocateMapActivity;
 
 public class HelpActivity extends ActionBarActivity implements OnClickListener {
 
     Button nearestBranch;
     Button productInfo;
+    Button faq;
+    Button contactUs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +40,7 @@ public class HelpActivity extends ActionBarActivity implements OnClickListener {
         final Context context = this;
 
         //Determine button to add listener to
-        nearestBranch = (Button) findViewById(R.id.nearestBranch);
+        nearestBranch = (Button) findViewById(R.id.button_redeem1);
         nearestBranch.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -58,6 +64,27 @@ public class HelpActivity extends ActionBarActivity implements OnClickListener {
                 //startActivityForResult(intent, 3);
             }
         });
+
+        faq = (Button)findViewById(R.id.topUp_button);
+        faq.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Goes to FAQ page
+                Intent intent = new Intent(context, FAQActivity.class);
+                startActivityForResult(intent,3);
+            }
+        });
+
+        contactUs = (Button)findViewById(R.id.button_deposit);
+        contactUs.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ContactUsActivity.class);
+                startActivityForResult(intent,3);
+            }
+        });
+
+        new AsyncCaller().execute();
     }
 
     @Override
@@ -102,6 +129,26 @@ public class HelpActivity extends ActionBarActivity implements OnClickListener {
 
     @Override
     public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        Log.i("USER", "Something happened");
+        MainActivity.getTimeCounter().resetTimer();
+    }
+
+    private class AsyncCaller extends AsyncTask<Void, Void, Void>
+    {
+        protected Void doInBackground(Void... params) {
+            //If user idle for 60 seconds log him out
+            while(MainActivity.getTimeCounter().countTime()<60000){}
+            setResult(1);
+            finish();
+
+            return null;
+        }
 
     }
 }

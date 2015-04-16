@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -94,12 +95,10 @@ public class LocateMapActivity extends ActionBarActivity implements ActionBar.Ta
             userLocation = new LatLng(location.getLatitude(), location.getLongitude());
         } else {
             //If cannot find user location, set by default to Lloyds headquarters
-            //userLocation = new LatLng(51.516272, -0.095594);
-
-            //My uk location for test
-            userLocation = new LatLng(54.979575,-1.585737);
+            userLocation = new LatLng(51.516272, -0.095594);
         }
 
+        new AsyncCaller().execute();
     }
 
 
@@ -148,5 +147,24 @@ public class LocateMapActivity extends ActionBarActivity implements ActionBar.Ta
 
     }
 
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        Log.i("USER", "Something happened");
+        MainActivity.getTimeCounter().resetTimer();
+    }
+
+    private class AsyncCaller extends AsyncTask<Void, Void, Void>
+    {
+        protected Void doInBackground(Void... params) {
+            //If user idle for 60 seconds log him out
+            while(MainActivity.getTimeCounter().countTime()<60000){}
+            setResult(2);
+            finish();
+
+            return null;
+        }
+
+    }
 
 }
