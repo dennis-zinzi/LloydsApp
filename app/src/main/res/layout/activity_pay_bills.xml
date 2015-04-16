@@ -25,19 +25,21 @@
         android:text="@string/pay_bills_note"
         android:id="@+id/textView_payBills_note"
         android:layout_below="@+id/textView_payBills"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="31dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Email:"
         android:id="@+id/textView10"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginLeft="19dp"
+        android:layout_marginStart="19dp"
         android:layout_below="@+id/textView_payBills_note"
-        android:layout_toLeftOf="@+id/textView_payBills"
-        android:layout_toStartOf="@+id/textView_payBills" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -46,19 +48,19 @@
         android:ems="10"
         android:id="@+id/editText"
         android:layout_alignBottom="@+id/textView10"
-        android:layout_alignRight="@+id/textView_payBills_note"
-        android:layout_alignEnd="@+id/textView_payBills_note" />
+        android:layout_alignLeft="@+id/textView_payBills"
+        android:layout_alignStart="@+id/textView_payBills" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Amount to pay:"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Amount:"
         android:id="@+id/textView12"
         android:layout_below="@+id/textView10"
-        android:layout_marginTop="29dp"
-        android:layout_toLeftOf="@+id/editText"
-        android:layout_toStartOf="@+id/editText" />
+        android:layout_alignLeft="@+id/textView10"
+        android:layout_alignStart="@+id/textView10"
+        android:layout_marginTop="18dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -67,16 +69,17 @@
         android:ems="10"
         android:id="@+id/editText2"
         android:layout_alignBottom="@+id/textView12"
-        android:layout_toRightOf="@+id/textView12"
-        android:layout_toEndOf="@+id/textView12" />
+        android:layout_alignLeft="@+id/editText"
+        android:layout_alignStart="@+id/editText" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Recipient Account:"
+        android:text="Recipient&apos;s account:"
         android:id="@+id/textView19"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="17dp"
+        android:layout_below="@+id/textView12"
         android:layout_alignLeft="@+id/textView12"
         android:layout_alignStart="@+id/textView12" />
 
@@ -87,37 +90,59 @@
         android:ems="10"
         android:id="@+id/editText4"
         android:layout_alignBottom="@+id/textView19"
-        android:layout_toEndOf="@+id/textView12"
-        android:layout_toRightOf="@+id/textView12" />
+        android:layout_toRightOf="@+id/textView19"
+        android:layout_toEndOf="@+id/textView19" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Reason for paying:"
+        android:text="Reason to pay:"
         android:id="@+id/textView20"
+        android:layout_marginTop="21dp"
         android:layout_below="@+id/textView19"
         android:layout_alignLeft="@+id/textView19"
-        android:layout_alignStart="@+id/textView19"
-        android:layout_marginTop="29dp" />
+        android:layout_alignStart="@+id/textView19" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
         android:id="@+id/editText5"
-        android:layout_alignTop="@+id/textView20"
-        android:layout_alignLeft="@+id/editText4"
-        android:layout_alignStart="@+id/editText4"
-        android:text="...." />
+        android:layout_below="@+id/textView19"
+        android:layout_toRightOf="@+id/textView20"
+        android:layout_toEndOf="@+id/textView20" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notify me by email"
+        android:id="@+id/checkBox"
+        android:checked="false"
+        android:layout_alignTop="@+id/checkBox2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notify me by text"
+        android:id="@+id/checkBox2"
+        android:checked="false"
+        android:layout_above="@+id/button"
+        android:layout_alignRight="@+id/editText2"
+        android:layout_alignEnd="@+id/editText2"
+        android:layout_marginBottom="55dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Pay"
-        android:id="@+id/button_payBill"
-        android:layout_marginTop="56dp"
-        android:layout_below="@+id/editText5"
-        android:layout_toRightOf="@+id/textView19"
-        android:layout_toEndOf="@+id/textView19" />
+        android:id="@+id/button"
+        android:layout_marginBottom="57dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>

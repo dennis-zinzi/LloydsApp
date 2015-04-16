@@ -29,7 +29,7 @@ public class PayBills extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay_bills);
         final Context context = this;
-        button_PayBill = (Button) findViewById(R.id.button_payBill);
+        button_PayBill = (Button) findViewById(R.id.button);
         button_PayBill.setOnClickListener(new View.OnClickListener() {
 
             @Override
