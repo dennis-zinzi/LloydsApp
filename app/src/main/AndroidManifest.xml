@@ -113,7 +113,7 @@
             android:label="@string/title_activity_pay_person" >
         </activity>
         <activity
-            android:name="uk.ac.ncl.csc2022.team10.budgeting.BudgetActivity"
+            android:name="uk.ac.ncl.csc2022.team10.lloydsapp.BudgetActivity"
             android:label="@string/title_activity_budgets" >
         </activity>
         <activity
