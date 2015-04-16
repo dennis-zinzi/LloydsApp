@@ -3,6 +3,9 @@ package uk.ac.ncl.csc2022.team10.datatypes;
 /**
  * Created by Dennis on 7/3/15.
  */
+/*
+    Modified by author: szholdiyarov
+ */
 
 import java.util.*;
 
@@ -11,49 +14,47 @@ public class Account {
     private int accountID;
     private double balance;
     private double overdraftLimit;
-    List<Transaction> transactionList;
+    private List<Transaction> transactionList;
 
-    public Account(int accountID,double balance,double overdraftLimit){
+    public Account(int accountID, double balance, double overdraftLimit) {
         this.accountID = accountID;
         this.balance = balance;
         this.overdraftLimit = overdraftLimit;
         transactionList = new ArrayList<Transaction>();
     }
 
-    public void addBalance(double moneyIn){
+    public void addBalance(double moneyIn) {
         balance += moneyIn;
     }
 
-    public void removeBalance(double moneyOut){
+    public void removeBalance(double moneyOut) {
         balance -= moneyOut;
     }
 
-    public void transferFund(double amount, Account to){
+    public void transferFund(double amount, Account to) {
         removeBalance(amount);
         to.addBalance(amount);
         Calendar c = Calendar.getInstance();
         int day = c.get(Calendar.DAY_OF_MONTH);
         int month = c.get(Calendar.MONTH);
         int year = c.get(Calendar.YEAR);
-        String date = day+"/"+month+"/"+year;
-        transactionList.add(new Transaction(amount,date,this,to));
-
-        //Add code to Update DB
+        String date = day + "/" + month + "/" + year;
+        transactionList.add(new Transaction(amount, date, this, to));
     }
 
-    public double getBalance(){
+    public double getBalance() {
         return balance;
     }
 
-    public double getOverdraftLimit(){
+    public double getOverdraftLimit() {
         return overdraftLimit;
     }
 
-    public int getAccountID(){
+    public int getAccountID() {
         return accountID;
     }
 
-    public List<Transaction> getTransaction(){
+    public List<Transaction> getTransaction() {
         return transactionList;
     }
 }

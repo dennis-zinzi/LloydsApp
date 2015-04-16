@@ -1,4 +1,7 @@
 package uk.ac.ncl.csc2022.team10.notificationmanager;
+/*
+    Created by author: szholdiyarov
+ */
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

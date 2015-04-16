@@ -2,12 +2,12 @@ package uk.ac.ncl.csc2022.team10.banking;
 
 import android.support.v7.app.ActionBarActivity;
 
-/* Created by szholdiyarov */
+/*
+    author: szholdiyarov
+ */
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,11 +18,11 @@ import android.widget.TextView;
 
 import uk.ac.ncl.csc2022.team10.lloydsapp.MainActivity;
 import uk.ac.ncl.csc2022.team10.lloydsapp.R;
-import uk.ac.ncl.csc2022.team10.lloydsapp.WalletFragment;
 
 
 public class TopUpActivity extends ActionBarActivity {
 
+    /* Declaration of variables */
     private TextView walletNameView;
     private TextView currentBalanceView;
     private EditText amountTopUp;
@@ -33,10 +33,10 @@ public class TopUpActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_up);
         Bundle b = getIntent().getExtras();
+
         walletsName = b.getString("name");
         balance = b.getDouble("balance1");
         walletNameView = (TextView) findViewById(R.id.textView_Wallet);
@@ -48,11 +48,8 @@ public class TopUpActivity extends ActionBarActivity {
 
         buttonTopUp = (Button) findViewById(R.id.button_topUp);
         buttonClose = (Button) findViewById(R.id.button_close);
-        final Intent intent1 = new Intent(this, WalletFragment.class);
         final Context context = this;
         buttonTopUp.setOnClickListener(new View.OnClickListener() {
-
-
             @Override
             public void onClick(View v) {
                 String amount = amountTopUp.getText().toString();
@@ -83,7 +80,6 @@ public class TopUpActivity extends ActionBarActivity {
             }
         });
         buttonClose.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 finish();
