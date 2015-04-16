@@ -3,8 +3,7 @@ package uk.ac.ncl.csc2022.team10.lloydsapp;
 
 
         import java.util.ArrayList;
-
-        import android.app.ActionBar;
+        import java.util.List;
         import android.app.Activity;
         import android.app.AlertDialog;
         import android.content.DialogInterface;
@@ -16,6 +15,7 @@ package uk.ac.ncl.csc2022.team10.lloydsapp;
         import android.view.Menu;
         import android.view.View;
         import android.view.View.OnLongClickListener;
+        import android.view.ViewGroup;
         import android.widget.Button;
         import android.widget.EditText;
         import android.widget.LinearLayout;
@@ -25,10 +25,13 @@ package uk.ac.ncl.csc2022.team10.lloydsapp;
         import android.widget.TextView;
         import android.widget.Toast;
 
+        import uk.ac.ncl.csc2022.team10.datatypes.User;
+        import uk.ac.ncl.csc2022.team10.datatypes.Budget;
+
 
 public class BudgetActivity extends Activity {
-    ArrayList<String[]> budgets;
-
+    List<Budget> budgets;
+    User user;
 
 
     @Override
@@ -37,9 +40,10 @@ public class BudgetActivity extends Activity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setTitle("Budgeting");
+        user = MainActivity.getUser();
 
 
-        budgets = getData();
+        budgets = user.getBudgets();
 
         ScrollView scroll = new ScrollView(this);
 
@@ -57,12 +61,57 @@ public class BudgetActivity extends Activity {
         addBudget.setText("Add Budget");
         addBudget.setBackgroundColor(Color.WHITE);
         addBudget.setGravity(Gravity.CENTER);
+        addBudget.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(BudgetActivity.this);
+
+                final EditText input = new EditText(BudgetActivity.this);
+
+                builder.setView(input);
+
+                builder.setMessage("Budget Name: ")
+                        .setTitle("New Budget")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                String value = input.getText().toString();
+
+
+                                Budget b = new Budget(value,100);
+                                user.addBudget(b);
+                                recreate();
+
+                            }
+                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Do Nothing
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+
+            }
+        });
+
 
         container.addView(addBudget);
 
-        for(int i=1; i<budgets.size()+1; i++){
+        budgets.add(new Budget("Grocery",60));
+        budgets.add(new Budget("Phone",30));
 
-            String[] tempBudget = budgets.get(i-1);
+
+        for(int i=0; i<budgets.size(); i++){
+
+            Budget tempBudget = budgets.get(i);
 
 
             LinearLayout containerBudgets = new LinearLayout(this);
@@ -108,43 +157,78 @@ public class BudgetActivity extends Activity {
 
                     AlertDialog dialog = builder.create();
                     dialog.show();
-                    return false; //Why does it need this?
+                    return false;
 
                 }
             });
 
             container.addView(containerBudgets,paramContainerBudgets);
 
-            TextView budgetName = new TextView(this);
-            budgetName.setText(tempBudget[0]);
-            budgetName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
-            containerBudgets.addView(budgetName);
+            LinearLayout containerBudgetTop = new LinearLayout(this);
+            containerBudgetTop.setOrientation(LinearLayout.HORIZONTAL);
+            LayoutParams paramContainerBudgetTop = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+            containerBudgets.addView(containerBudgetTop,paramContainerBudgetTop);
 
-            LinearLayout containerBudgetInfo = new LinearLayout(this);
-            containerBudgetInfo.setOrientation(LinearLayout.HORIZONTAL);
-            LayoutParams paramContainerBudgetInfo = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-            containerBudgets.addView(containerBudgetInfo,paramContainerBudgetInfo);
+            TextView budgetName = new TextView(this);
+            budgetName.setText(tempBudget.getName());
+            budgetName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            containerBudgetTop.addView(budgetName);
+
+            Button editBudget = new Button(this);
+            LayoutParams editBudgetParam = new LayoutParams(LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            editBudget.setText("Edit");
+            editBudgetParam.gravity = Gravity.RIGHT;
+            editBudget.setBackgroundColor(Color.WHITE);
+            editBudget.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(BudgetActivity.this);
+
+                    final EditText input = new EditText(BudgetActivity.this);
+
+                    builder.setView(input);
+
+                    builder.setMessage("Edit budget settings: ")
+                            .setTitle("Edit Budget")
+                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    //Do update to budget
+
+                                }
+                            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //Do Nothing
+                        }
+                    });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
+
+                }
+            });
+            containerBudgetTop.addView(editBudget,editBudgetParam);
+
+
+
 
             ProgressBar Pb = new ProgressBar(this,null,android.R.attr.progressBarStyleHorizontal);
-            Pb.setProgress(((int)((Double.valueOf(tempBudget[4])/Double.valueOf(tempBudget[1]))*100)));
+            Pb.setProgress((int)(tempBudget.getCurrentSpend()/tempBudget.getLimit())*100);
             Pb.setPadding(10, 0, 10, 0);
-            containerBudgetInfo.addView(Pb,paramContainerBudgetInfo);
+            containerBudgets.addView(Pb);
 
             TextView currentSpend = new TextView(this);
-            currentSpend.setText("Current spend: £"+tempBudget[4]+"\nLimit: £"+tempBudget[1]);
+            currentSpend.setText("Current spend: £"+(int)tempBudget.getCurrentSpend()+"\nLimit: £"+tempBudget.getLimit());
             currentSpend.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             currentSpend.setPadding(0, 0, 0, 10);
-            containerBudgets.addView(currentSpend,paramContainerBudgetInfo);
-
-
-
-			/*Button AddToCurrent = new Button(this);
-			AddToCurrent.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
-			AddToCurrent.setText("Edit");
-			AddToCurrent.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-			AddToCurrent.setGravity(Gravity.CENTER);
-			containerBudgets.addView(AddToCurrent);*/
-
+            containerBudgets.addView(currentSpend);
 
 
         }
@@ -161,7 +245,7 @@ public class BudgetActivity extends Activity {
         return true;
     }
 
-    public static ArrayList<String[]> getData(){
+    public static ArrayList<String[]> getTempFalseData(){
 
 
 
