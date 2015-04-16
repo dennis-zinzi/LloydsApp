@@ -181,6 +181,8 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         user.addContact(new Contact("Tom", new Account(2, 50, 1000)));
         user.addContact(new Contact("Sanzhar", new Account(3, 190, 5000)));
         user.addContact(new Contact("Rhys", new Account(4, 500, 10000)));
+        user.addBudget(new Budget("Shopping", 50.0));
+        user.addBudget(new Budget("Lifestyle", 60.0));
     }
 
     @Override
