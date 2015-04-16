@@ -23,9 +23,9 @@ public class StandingOrders extends ActionBarActivity {
         setContentView(R.layout.activity_standing_orders);
 
         final ListView listview = (ListView) findViewById(R.id.listview);
-        String[] values = new String[]{"Sky Broadband | 15£ | 6.04 | Paid", "University Fees | 1000£ | 15.04 | Pending..", "Your Insurance | 30£ | 16.04",
-                "Susan's Insurance | 30£ | 16.04", "Tom's Insurance | 30£ | 16.04", "TV Licence | 100£ | 18.04", "Electricity Bill | 20£ | 20.04", "Water Bill | 5£ | 21.04",
-                "Car Rent | 50£ | 22.04", "Utility Bill | 15£ | 23.04", "School | 100£ | 27.04", "Sky TV | 15£ | 28.04"};
+        String[] values = new String[]{"Sky Broadband | 15£ | 6.04 | Paid", "University Fees | 1000£ | 15.04 | Pending..", "Your Insurance | 30£ | 16.04 | To be paid",
+                "Susan's Insurance | 30£ | 16.04 | To be paid", "Tom's Insurance | 30£ | 16.04 | To be paid", "TV Licence | 100£ | 18.04 | To be paid", "Electricity Bill | 20£ | 20.04 | To be paid", "Water Bill | 5£ | 21.04 | To be paid",
+                "Car Rent | 50£ | 22.04 | To be paid", "Utility Bill | 15£ | 23.04 | To be paid", "School | 100£ | 27.04 | To be paid", "Sky TV | 15£ | 28.04 | To be paid"};
 
         final ArrayList<String> list = new ArrayList<String>();
         for (int i = 0; i < values.length; ++i) {
