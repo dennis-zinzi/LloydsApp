@@ -47,10 +47,6 @@ public class LoginActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_login);
-        account = (EditText) findViewById(R.id.toContact);
-        password = (EditText) findViewById(R.id.editText3);
-        password.setText("hello1");
-        account.setText("12345");
 
         addListenerOnButton();
     }
