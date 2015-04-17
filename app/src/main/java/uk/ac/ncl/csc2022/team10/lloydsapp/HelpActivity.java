@@ -17,6 +17,7 @@ import android.view.View.OnClickListener;
 
 import uk.ac.ncl.csc2022.team10.help.ContactUsActivity;
 import uk.ac.ncl.csc2022.team10.help.FAQActivity;
+import uk.ac.ncl.csc2022.team10.help.ProductInfoActivity;
 import uk.ac.ncl.csc2022.team10.locationmanager.LocateMapActivity;
 
 public class HelpActivity extends ActionBarActivity implements OnClickListener {
@@ -80,6 +81,15 @@ public class HelpActivity extends ActionBarActivity implements OnClickListener {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ContactUsActivity.class);
+                startActivityForResult(intent,3);
+            }
+        });
+
+        productInfo = (Button)findViewById(R.id.productInfo);
+        productInfo.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ProductInfoActivity.class);
                 startActivityForResult(intent,3);
             }
         });

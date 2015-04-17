@@ -1,4 +1,4 @@
-package uk.ac.ncl.csc2022.team10.lloydsapp;
+package uk.ac.ncl.csc2022.team10.budgeting;
 
 /**
  * Created by Rhys Covell
@@ -10,8 +10,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
@@ -32,6 +34,10 @@ import java.util.List;
 
 import uk.ac.ncl.csc2022.team10.datatypes.Budget;
 import uk.ac.ncl.csc2022.team10.datatypes.User;
+import uk.ac.ncl.csc2022.team10.lloydsapp.HelpActivity;
+import uk.ac.ncl.csc2022.team10.lloydsapp.MainActivity;
+import uk.ac.ncl.csc2022.team10.lloydsapp.R;
+import uk.ac.ncl.csc2022.team10.lloydsapp.SettingsActivity;
 
 
 public class BudgetActivity extends Activity {
@@ -48,6 +54,8 @@ public class BudgetActivity extends Activity {
         user = MainActivity.getUser();
         budgets = user.getBudgets();
         buildPage();
+
+        new AsyncCaller().execute();
 
     }
 
@@ -354,5 +362,25 @@ public class BudgetActivity extends Activity {
 
 
         }
+    }
+
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        Log.i("USER", "Something happened");
+        MainActivity.getTimeCounter().resetTimer();
+    }
+
+    private class AsyncCaller extends AsyncTask<Void, Void, Void>
+    {
+        protected Void doInBackground(Void... params) {
+            //If user idle for 60 seconds log him out
+            while(MainActivity.getTimeCounter().countTime()<60000){}
+            setResult(2);
+            finish();
+
+            return null;
+        }
+
     }
 }

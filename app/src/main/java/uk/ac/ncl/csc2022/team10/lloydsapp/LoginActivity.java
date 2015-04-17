@@ -80,59 +80,60 @@ public class LoginActivity extends Activity implements OnClickListener {
         exitButton = (Button) findViewById(R.id.exit);
 
         //Add listener using Anonymous class
-        loginButton.setOnClickListener(new OnClickListener() {
-                                           @Override
-                                           public void onClick(View v) {
-                                               try {
-                                                   MyAsyncTask asyncTask;
-                                                   asyncTask = new MyAsyncTask();
-                                                   Integer result = asyncTask.execute().get();
-                                                   if (result == 1) {
+        loginButton.setOnClickListener(
+                new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            MyAsyncTask asyncTask;
+                            asyncTask = new MyAsyncTask();
+                            Integer result = asyncTask.execute().get();
+                            if (result == 1) {
 
-                                                       account = (EditText) findViewById(R.id.toContact);
+                                account = (EditText) findViewById(R.id.toContact);
 
-                                                       Account a = new Account(1, 10000, 1000);
-                                                       user = new User("Dennis", "123456", a);
-                                                       MainActivity.setUser(user);
-                                                       MainActivity.setWallets();
-                                                       MainActivity.setPoints();
+                                Account a = new Account(1, 10000, 1000);
+                                user = new User("Dennis", "123456", a);
+                                MainActivity.setUser(user);
+                                MainActivity.setWallets();
+                                MainActivity.setPoints();
 
-                                                       startActivity(newIntent);
-                                                       asyncTask.cancel(true);
+                                startActivity(newIntent);
+                                asyncTask.cancel(true);
 
-                                                   } else {
-                                                       new AlertDialog.Builder(context)
-                                                               .setTitle("Something wrong")
-                                                               .setMessage("Please check your details and try again")
-                                                               .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
-                                                                   public void onClick(DialogInterface dialog, int which) {
-                                                                       Intent intent = new Intent(LoginActivity.this,
-                                                                               LoginActivity.class);
+                            } else {
+                                new AlertDialog.Builder(context)
+                                        .setTitle("Something wrong")
+                                        .setMessage("Please check your details and try again")
+                                        .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Intent intent = new Intent(LoginActivity.this,
+                                                        LoginActivity.class);
 
-                                                                       startActivity(intent);
-                                                                       dialog.cancel();
-                                                                   }
-                                                               })
-                                                               .setIcon(android.R.drawable.ic_dialog_alert)
-                                                               .show();
+                                                startActivity(intent);
+                                                dialog.cancel();
+                                            }
+                                        })
+                                        .setIcon(android.R.drawable.ic_dialog_alert)
+                                        .show();
 
-                                                   }
-                                               } catch (
-                                                       InterruptedException e
-                                                       )
+                            }
+                        } catch (
+                                InterruptedException e
+                                )
 
-                                               {
-                                                   e.printStackTrace();
-                                               } catch (
-                                                       ExecutionException e
-                                                       )
+                        {
+                            e.printStackTrace();
+                        } catch (
+                                ExecutionException e
+                                )
 
-                                               {
-                                                   e.printStackTrace();
-                                               }
-                                           }
+                        {
+                            e.printStackTrace();
+                        }
+                    }
 
-                                       }
+                }
 
         );
 
