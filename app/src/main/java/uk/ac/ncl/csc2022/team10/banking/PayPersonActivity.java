@@ -70,19 +70,44 @@ public class PayPersonActivity extends ActionBarActivity {
                                             availNum.setText(String.format("%.2f",user.getAccount().getBalance()));
                                         }
                                         else{
-                                            AlertDialog alertDialog = new AlertDialog.Builder(PayPersonActivity.this).create();
-                                            alertDialog.setTitle("Error");
-                                            alertDialog.setMessage("Not enough funds to make transfer");
-                                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                                    new DialogInterface.OnClickListener() {
-                                                        public void onClick(DialogInterface dialog, int which) {
-                                                            dialog.dismiss();
-                                                        }
-                                                    });
-                                            alertDialog.show();
+                                            if(Math.abs(user.getAccount().getBalance()-Double.parseDouble(amountPerson.getText().toString()))<=user.getAccount().getOverdraftLimit()) {
+                                                AlertDialog alertDialog = new AlertDialog.Builder(PayPersonActivity.this).create();
+                                                alertDialog.setTitle("Warning");
+                                                alertDialog.setMessage("You will now enter in your Overdraft, Continue?");
+                                                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES",
+                                                        new DialogInterface.OnClickListener() {
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                Account acc = new Account(Integer.parseInt(toAccountNum.getText().toString()), 500, 10000);
+                                                                user.getAccount().transferFund(Double.parseDouble(String.format("%.2f", Double.parseDouble(amountPerson.getText().toString()))), acc);
+                                                                amountPerson.setText("");
+                                                                toAccountNum.setText("");
+                                                                availNum.setText(String.format("%.2f", user.getAccount().getBalance()));
+                                                            }
+                                                        });
+
+                                                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "NO",
+                                                        new DialogInterface.OnClickListener() {
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                dialog.dismiss();
+                                                            }
+                                                        });
+                                                alertDialog.show();
+                                            }
+                                            else {
+                                                AlertDialog alertDialog = new AlertDialog.Builder(PayPersonActivity.this).create();
+                                                alertDialog.setTitle("Error");
+                                                alertDialog.setMessage("Not enough funds to make transfer");
+                                                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                                        new DialogInterface.OnClickListener() {
+                                                            public void onClick(DialogInterface dialog, int which) {
+                                                                dialog.dismiss();
+                                                            }
+                                                        });
+                                                alertDialog.show();
+                                            }
                                         }
                                     }
-                            });
+                                });
 
                         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "NO",
                                 new DialogInterface.OnClickListener() {
@@ -105,16 +130,44 @@ public class PayPersonActivity extends ActionBarActivity {
                             availNum.setText(String.format("%.2f",user.getAccount().getBalance()));
                         }
                         else{
-                            AlertDialog alertDialog = new AlertDialog.Builder(PayPersonActivity.this).create();
-                            alertDialog.setTitle("Error");
-                            alertDialog.setMessage("Not enough funds to make transfer");
-                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                        }
-                                    });
-                            alertDialog.show();
+                            if(Math.abs(user.getAccount().getBalance()-Double.parseDouble(amountPerson.getText().toString()))<=user.getAccount().getOverdraftLimit()) {
+                                AlertDialog alertDialog = new AlertDialog.Builder(PayPersonActivity.this).create();
+                                alertDialog.setTitle("Warning");
+                                alertDialog.setMessage("You will now enter in your Overdraft, Continue?");
+                                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "YES",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Account acc = new Account(Integer.parseInt(toAccountNum.getText().toString()), 500, 10000);
+                                                Contact newContact = new Contact(contactNameSave.getText().toString(), acc);
+                                                user.addContact(newContact);
+                                                user.getAccount().transferFund(Double.parseDouble(String.format("%.2f", Double.parseDouble(amountPerson.getText().toString()))), acc);
+                                                amountPerson.setText("");
+                                                toAccountNum.setText("");
+                                                contactNameSave.setText("");
+                                                availNum.setText(String.format("%.2f", user.getAccount().getBalance()));
+                                            }
+                                        });
+
+                                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "NO",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+                                            }
+                                        });
+                                alertDialog.show();
+                            }
+                            else {
+                                AlertDialog alertDialog = new AlertDialog.Builder(PayPersonActivity.this).create();
+                                alertDialog.setTitle("Error");
+                                alertDialog.setMessage("Not enough funds to make transfer");
+                                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+                                            }
+                                        });
+                                alertDialog.show();
+                            }
                         }
                     }
                 }
