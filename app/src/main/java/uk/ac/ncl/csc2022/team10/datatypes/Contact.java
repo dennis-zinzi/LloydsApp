@@ -9,17 +9,17 @@ public class Contact {
     private String name;
     private Account account;
 
-    public Contact(String name, Account account){
+    public Contact(String name, Account account) {
         this.name = name;
         this.account = account;
     }
 
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public Account getAccount(){
+    public Account getAccount() {
         return account;
     }
 }

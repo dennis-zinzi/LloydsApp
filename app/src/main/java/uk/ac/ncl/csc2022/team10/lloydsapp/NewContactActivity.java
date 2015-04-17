@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import uk.ac.ncl.csc2022.team10.databasemanager.DatabaseHelper;
 import uk.ac.ncl.csc2022.team10.datatypes.Account;
 import uk.ac.ncl.csc2022.team10.datatypes.Contact;
 import uk.ac.ncl.csc2022.team10.datatypes.User;
@@ -24,6 +25,7 @@ public class NewContactActivity extends ActionBarActivity {
     Button create;
     EditText nameBox;
     EditText accountNum;
+    DatabaseHelper db = new DatabaseHelper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,25 +37,31 @@ public class NewContactActivity extends ActionBarActivity {
         user = MainActivity.getUser();
 
 
-        create = (Button)findViewById(R.id.create);
-        nameBox = (EditText)findViewById(R.id.nameBox);
-        accountNum = (EditText)findViewById(R.id.accountNum);
+        create = (Button) findViewById(R.id.create);
+        nameBox = (EditText) findViewById(R.id.nameBox);
+        accountNum = (EditText) findViewById(R.id.accountNum);
 
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!nameBox.getText().toString().equals("") && !accountNum.getText().toString().equals("")){
+                if (!nameBox.getText().toString().equals("") && !accountNum.getText().toString().equals("")) {
                     //Check DB for Account with corresponding Account Number
                     //Account acc = SELECT * FROM Accounts WHERE AccountID = Integer.parseInt(accountNum.toString());
-                    Account acc = new Account(Integer.parseInt(accountNum.getText().toString()),200,9000);
+                    Account acc = new Account(Integer.parseInt(accountNum.getText().toString()), 200, 9000);
                     //Should throw Alert Dialog if no Account match
-                    Contact newContact = new Contact(nameBox.getText().toString(),acc);
+                    Contact newContact = new Contact(nameBox.getText().toString(), acc);
+                    try {
+                        Log.i("NewContactActivity","asdss");
+                        db.createAccount(Integer.toString(acc.getAccountID()), MainActivity.getUser().getName(), MainActivity.getUser().getUserID());
+                        db.createContact(newContact.getName(), Integer.toString(newContact.getAccount().getAccountID()), MainActivity.getUser().getUserID());
+                    } catch (Exception e) {
+                        Log.i("NewContactActivity", " Failed to connect to database");
+                    }
                     user.addContact(newContact);
                     TransferFragment.setToContact(newContact.getName());
                     TransferFragment.setSelectedContact(newContact);
                     finish();
-                }
-                else {
+                } else {
                     if (nameBox.getText().toString().equals("")) {
                         AlertDialog alertDialog = new AlertDialog.Builder(NewContactActivity.this).create();
                         alertDialog.setTitle("Warning");
@@ -65,8 +73,7 @@ public class NewContactActivity extends ActionBarActivity {
                                     }
                                 });
                         alertDialog.show();
-                    }
-                    else{
+                    } else {
                         AlertDialog alertDialog = new AlertDialog.Builder(NewContactActivity.this).create();
                         alertDialog.setTitle("Warning");
                         alertDialog.setMessage("Empty Account Number field");
@@ -138,11 +145,11 @@ public class NewContactActivity extends ActionBarActivity {
         MainActivity.getTimeCounter().resetTimer();
     }
 
-    private class AsyncCaller extends AsyncTask<Void, Void, Void>
-    {
+    private class AsyncCaller extends AsyncTask<Void, Void, Void> {
         protected Void doInBackground(Void... params) {
             //If user idle for 60 seconds log him out
-            while(MainActivity.getTimeCounter().countTime()<60000){}
+            while (MainActivity.getTimeCounter().countTime() < 60000) {
+            }
             finish();
 
             return null;
