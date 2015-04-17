@@ -1,7 +1,5 @@
 package uk.ac.ncl.csc2022.team10.lloydsapp;
-/**
- * Created by Dennis.
- */
+
 /*
     Modified by author: szholdiyarov
  */
@@ -21,40 +19,38 @@ import uk.ac.ncl.csc2022.team10.banking.StatementActivity;
 import uk.ac.ncl.csc2022.team10.datatypes.User;
 
 public class BankingFragment extends Fragment {
+    /*Declarations of variables */
     private static final String ARG_SECTION_NUMBER = "section_number";
-    private User user;
-
     private Button viewStatement;
     private Button payPerson;
     private Button payBills;
     private Button standingOrders;
+    private Intent intent;
 
-    public static BankingFragment newInstance(int sectionNumber) {
+    /*public static BankingFragment newInstance(int sectionNumber) {
         BankingFragment fragment = new BankingFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
-    }
+    }*/
 
-    public BankingFragment() {
-        user = MainActivity.getUser();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_banking, container,
                 false);
-
+        /* Set appropriate buttons */
         viewStatement = (Button) rootView.findViewById(R.id.topUp_button);
         payPerson = (Button) rootView.findViewById(R.id.payPerson);
         payBills = (Button) rootView.findViewById(R.id.payBills);
         standingOrders = (Button) rootView.findViewById(R.id.standingOrders);
+        /* Set buttons listeners */
         viewStatement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), StatementActivity.class);
+                intent = new Intent(getActivity(), StatementActivity.class);
                 startActivity(intent);
             }
         });
@@ -62,7 +58,7 @@ public class BankingFragment extends Fragment {
         payPerson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), PayPersonActivity.class);
+                intent = new Intent(getActivity(), PayPersonActivity.class);
                 startActivity(intent);
             }
         });
@@ -70,14 +66,14 @@ public class BankingFragment extends Fragment {
         payBills.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), PayBills.class);
+                intent = new Intent(getActivity(), PayBills.class);
                 startActivity(intent);
             }
         });
         standingOrders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), StandingOrders.class);
+                intent = new Intent(getActivity(), StandingOrders.class);
                 startActivity(intent);
             }
         });

@@ -1,6 +1,7 @@
 package uk.ac.ncl.csc2022.team10.notificationmanager;
 /*
     Created by author: szholdiyarov
+    Purpose: Register device id
  */
 
 import java.io.BufferedReader;
@@ -23,17 +24,11 @@ public class InsertId {
         con1.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 
         String urlParameters = "id=" + param;
-        System.out.println(urlParameters);
         con1.setDoOutput(true);
         DataOutputStream wr = new DataOutputStream(con1.getOutputStream());
         wr.writeBytes(urlParameters);
         wr.flush();
         wr.close();
-
-        int responseCode = con1.getResponseCode();
-        System.out.println("\nSending 'POST' request to URL : " + url);
-        System.out.println("Post parameters : " + urlParameters);
-        System.out.println("Response Code : " + responseCode);
 
         BufferedReader in = new BufferedReader(new InputStreamReader(
                 con1.getInputStream()));
@@ -44,9 +39,6 @@ public class InsertId {
             response.append(inputLine);
         }
         in.close();
-
-        System.out.println(response.toString());
-
     }
 
 }
