@@ -4,7 +4,9 @@ package uk.ac.ncl.csc2022.team10.banking;
     Purpose: Show standing activity
  */
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -13,14 +15,20 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
+import uk.ac.ncl.csc2022.team10.datatypes.User;
 import uk.ac.ncl.csc2022.team10.lloydsapp.HelpActivity;
+import uk.ac.ncl.csc2022.team10.lloydsapp.LoginActivity;
 import uk.ac.ncl.csc2022.team10.lloydsapp.MainActivity;
 import uk.ac.ncl.csc2022.team10.lloydsapp.R;
 import uk.ac.ncl.csc2022.team10.lloydsapp.SettingsActivity;
@@ -32,6 +40,7 @@ public class StandingOrders extends ActionBarActivity {
     private ListView listView;
     private ArrayList<String> list;
     private StableArrayAdapter adapter;
+    private Button buttonAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +60,7 @@ public class StandingOrders extends ActionBarActivity {
         adapter = new StableArrayAdapter(this,
                 android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);
+        addListenerOnButton();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             new AsyncCaller().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         } else {
@@ -58,6 +68,18 @@ public class StandingOrders extends ActionBarActivity {
         }
     }
 
+    public void addListenerOnButton() {
+        final Intent newIntent = new Intent(this, AddNewStandingOrder.class);
+        buttonAdd = (Button) findViewById(R.id.button_addNew);
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+                                         @Override
+                                         public void onClick(View v) {
+                                             startActivity(newIntent);
+                                         }
+                                     }
+
+        );
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -100,21 +122,20 @@ public class StandingOrders extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            Intent i = new Intent(this,SettingsActivity.class);
+            Intent i = new Intent(this, SettingsActivity.class);
             startActivity(i);
             return true;
-        }
-        else if(id == R.id.action_help){
-            Intent i = new Intent(this,HelpActivity.class);
+        } else if (id == R.id.action_help) {
+            Intent i = new Intent(this, HelpActivity.class);
             startActivity(i);
             return true;
-        }
-        else if(id == R.id.action_logout){
+        } else if (id == R.id.action_logout) {
             setResult(2);
             finish();
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onUserInteraction() {
         super.onUserInteraction();
@@ -122,11 +143,11 @@ public class StandingOrders extends ActionBarActivity {
         MainActivity.getTimeCounter().resetTimer();
     }
 
-    private class AsyncCaller extends AsyncTask<Void, Void, Void>
-    {
+    private class AsyncCaller extends AsyncTask<Void, Void, Void> {
         protected Void doInBackground(Void... params) {
             //If user idle for 60 seconds log him out
-            while(MainActivity.getTimeCounter().countTime()<60000){}
+            while (MainActivity.getTimeCounter().countTime() < 60000) {
+            }
             setResult(2);
             finish();
 

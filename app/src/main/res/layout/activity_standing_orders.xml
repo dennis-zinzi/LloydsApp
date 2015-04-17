@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="Add new" />
+        android:text="@string/standing_order_add" />
 
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/listview"
