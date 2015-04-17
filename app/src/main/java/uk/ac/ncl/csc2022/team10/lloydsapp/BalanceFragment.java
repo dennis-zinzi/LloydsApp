@@ -58,7 +58,7 @@ public class BalanceFragment extends Fragment {
 
         balanceLabel.setText(String.format("%.2f", user.getAccount().getBalance()));
         overdraftLabel.setText(String.format("%.2f", user.getAccount().getOverdraftLimit()));
-        pointsComp.setText("Points: "+user.getPoints().toString()
+        pointsComp.setText("Points: "+user.getPoints()
                         +"\nEntered into competition: "+ false); // ---------------------------Need boolean for whether entered or not.
 
 
