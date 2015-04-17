@@ -9,23 +9,32 @@
     android:background="@color/lloyds_green"
     tools:context="uk.ac.ncl.csc2022.team10.lloydsapp.SettingsActivity" >
 
+    <ImageView
+        android:id="@+id/bankLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/lloyds_bank_logo"
+        android:layout_above="@+id/topUp_button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
     <Button
         android:id="@+id/passwordChange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="82dp"
-        android:text="Change Password" />
+        android:text="Change Password"
+        android:layout_above="@+id/currencyChange"
+        android:layout_alignRight="@+id/currencyChange"
+        android:layout_alignEnd="@+id/currencyChange" />
 
     <Button
         android:id="@+id/currencyChange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/passwordChange"
-        android:layout_alignRight="@+id/passwordChange"
-        android:layout_below="@+id/passwordChange"
-        android:layout_marginTop="36dp"
-        android:text="Change Currency" />
+        android:text="Change Currency"
+        android:layout_marginBottom="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

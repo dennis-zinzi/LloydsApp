@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/lloyds_green"
     android:screenOrientation="portrait"
     tools:context="uk.ac.ncl.csc2022.team10.lloydsapp.BankingFragment" >
 
@@ -15,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/lloyds_bank_logo"
-        android:layout_alignParentTop="true"
+        android:layout_above="@+id/topUp_button"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -26,9 +27,11 @@
         android:height="30dp"
         android:text="Standing Orders"
         android:width="175dp"
+        android:background="@color/white"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/payPerson"
-        android:layout_alignStart="@+id/payPerson" />
+        android:layout_alignStart="@+id/payPerson"
+        android:layout_marginBottom="2dp"/>
 
     <Button
         android:id="@+id/payPerson"
@@ -37,9 +40,11 @@
         android:height="30dp"
         android:text="Pay Person"
         android:width="175dp"
+        android:background="@color/white"
         android:layout_above="@+id/standingOrders"
         android:layout_alignLeft="@+id/payBills"
-        android:layout_alignStart="@+id/payBills" />
+        android:layout_alignStart="@+id/payBills"
+        android:layout_marginBottom="2dp"/>
 
     <Button
         android:id="@+id/payBills"
@@ -48,8 +53,10 @@
         android:height="30dp"
         android:text="Pay Bills"
         android:width="175dp"
+        android:background="@color/white"
         android:layout_above="@+id/payPerson"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="2dp"/>
 
     <Button
         android:id="@+id/topUp_button"
@@ -58,8 +65,10 @@
         android:height="30dp"
         android:text="View Statement"
         android:width="175dp"
+        android:background="@color/white"
         android:layout_above="@+id/payBills"
         android:layout_alignLeft="@+id/payBills"
-        android:layout_alignStart="@+id/payBills" />
+        android:layout_alignStart="@+id/payBills"
+        android:layout_marginBottom="2dp"/>
 
 </RelativeLayout>

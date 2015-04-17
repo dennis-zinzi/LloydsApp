@@ -130,7 +130,7 @@
             android:layout_alignLeft="@+id/textView9"
             android:layout_below="@+id/button_redeem1"
             android:layout_marginTop="15dp"
-            android:text="Lloyds Ponts:"
+            android:text="Lloyds Points:"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
