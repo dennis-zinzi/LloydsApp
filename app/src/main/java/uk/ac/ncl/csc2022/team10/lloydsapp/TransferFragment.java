@@ -45,7 +45,6 @@ public class TransferFragment extends Fragment {
     }
 
     public TransferFragment() {
-        user = MainActivity.getUser();
         //acc = new Account(25,1096.67,2500.00);
     }
 
@@ -54,6 +53,8 @@ public class TransferFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_transfer, container,
                 false);
+
+        user = MainActivity.getUser();
 
         balanceLabel = (TextView)rootView.findViewById(R.id.availBalance);
         balanceLabel.setText(String.format("%.2f",user.getAccount().getBalance()));
@@ -76,25 +77,32 @@ public class TransferFragment extends Fragment {
             @Override
             public void onClick(View v){
                 if(!amountBox.getText().toString().equals("") && selectedContact != null) {
+                    double amount = Double.parseDouble(String.format("%.2f",Double.parseDouble(amountBox.getText().toString())));
                     //Check if enough funds to make transfer
-                    if(user.getAccount().getBalance()-Double.parseDouble(amountBox.getText().toString())>=0) {
+                    if((user.getAccount().getBalance()-amount)>=0) {
                         //Transfers inputted money to selected account
-                        user.getAccount().transferFund(Double.parseDouble(String.format("%.2f",Double.parseDouble(amountBox.getText().toString()))), selectedContact.getAccount());
+                        user.getAccount().transferFund(amount, selectedContact.getAccount());
                         Log.i("TRANSFERED", Double.parseDouble(amountBox.getText().toString()) + "to " + selectedContact.getName());
                         //Update balance label
                         balanceLabel.setText(String.format("%.2f",user.getAccount().getBalance()));
                     }
                     else{
-                        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
-                        alertDialog.setTitle("Error");
-                        alertDialog.setMessage("Not enough funds to make transfer");
-                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                        alertDialog.show();
+                        if(Math.abs(user.getAccount().getBalance()-amount)<=user.getAccount().getOverdraftLimit()) {
+                            user.getAccount().transferFund(amount, selectedContact.getAccount());
+                            balanceLabel.setText(String.format("%.2f", user.getAccount().getBalance()));
+                        }
+                        else {
+                            AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+                            alertDialog.setTitle("Error");
+                            alertDialog.setMessage("Not enough funds to make transfer");
+                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            alertDialog.show();
+                        }
                     }
                     //Reset fields
                     toContact.setText("");
