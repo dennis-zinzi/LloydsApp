@@ -16,6 +16,7 @@ import android.widget.EditText;
 import uk.ac.ncl.csc2022.team10.lloydsapp.R;
 
 public class AddNewStandingOrder extends ActionBarActivity {
+    /* Declarations of variables */
     private Button buttonAdd;
     private EditText nameEditText;
     private EditText amountEditText;
@@ -50,6 +51,7 @@ public class AddNewStandingOrder extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /* Add listeners to button */
     public void addListenerOnButton() {
         buttonAdd = (Button) findViewById(R.id.button_standing_order_add);
         nameEditText = (EditText) findViewById(R.id.editText_standing_order_name);
@@ -59,8 +61,8 @@ public class AddNewStandingOrder extends ActionBarActivity {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
                                          @Override
                                          public void onClick(View v) {
+                                             /* Get new order details */
                                              newOrder = nameEditText.getText().toString() + " | " + amountEditText.getText().toString() + " | " + dateEditText.getText().toString() + " | To pay";
-                                             Log.i("AddNewStandingOrder", newOrder);
                                              StandingOrders.addToList(newOrder);
                                              finish();
                                          }

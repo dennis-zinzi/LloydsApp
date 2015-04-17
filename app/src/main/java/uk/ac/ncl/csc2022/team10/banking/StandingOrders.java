@@ -4,31 +4,24 @@ package uk.ac.ncl.csc2022.team10.banking;
     Purpose: Show standing activity
  */
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
-import uk.ac.ncl.csc2022.team10.datatypes.User;
 import uk.ac.ncl.csc2022.team10.lloydsapp.HelpActivity;
-import uk.ac.ncl.csc2022.team10.lloydsapp.LoginActivity;
 import uk.ac.ncl.csc2022.team10.lloydsapp.MainActivity;
 import uk.ac.ncl.csc2022.team10.lloydsapp.R;
 import uk.ac.ncl.csc2022.team10.lloydsapp.SettingsActivity;
@@ -39,7 +32,7 @@ public class StandingOrders extends ActionBarActivity {
     private static String[] values;
     private static ListView listView;
     private static ArrayList<String> list;
-    private StableArrayAdapter adapter;
+    public static StableArrayAdapter adapter;
     private Button buttonAdd;
 
     @Override
@@ -61,6 +54,7 @@ public class StandingOrders extends ActionBarActivity {
                 android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);
         addListenerOnButton();
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             new AsyncCaller().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         } else {
@@ -68,13 +62,13 @@ public class StandingOrders extends ActionBarActivity {
         }
     }
 
+    /* Update list view with a new added element */
     @Override
     protected void onResume() {
         super.onResume();
-       // adapter.notifyDataSetChanged();
-
-        Log.i("StandingOrder","onResume");
-
+        adapter = new StableArrayAdapter(this,
+                android.R.layout.simple_list_item_1, list);
+        listView.setAdapter(adapter);
     }
 
     public void addListenerOnButton() {
@@ -97,12 +91,47 @@ public class StandingOrders extends ActionBarActivity {
         return true;
     }
 
-    /* Private class for custom ArrayAdapter*/
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handling action bar item clicks here.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent i = new Intent(this, SettingsActivity.class);
+            startActivity(i);
+            return true;
+        } else if (id == R.id.action_help) {
+            Intent i = new Intent(this, HelpActivity.class);
+            startActivity(i);
+            return true;
+        } else if (id == R.id.action_logout) {
+            setResult(2);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        MainActivity.getTimeCounter().resetTimer();
+    }
+
+
+    public static ArrayList<String> getList() {
+        return list;
+    }
+
+    public static void addToList(String newOrder) {
+        list.add(newOrder);
+    }
+
+    /* Private class for custom ArrayAdapter*/
     private class StableArrayAdapter extends ArrayAdapter<String> {
 
         private HashMap<String, Integer> orders = new HashMap<String, Integer>();
 
+        /* add object to hash map */
         public StableArrayAdapter(Context context, int textViewResourceId,
                                   List<String> objects) {
             super(context, textViewResourceId, objects);
@@ -124,34 +153,6 @@ public class StandingOrders extends ActionBarActivity {
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            Intent i = new Intent(this, SettingsActivity.class);
-            startActivity(i);
-            return true;
-        } else if (id == R.id.action_help) {
-            Intent i = new Intent(this, HelpActivity.class);
-            startActivity(i);
-            return true;
-        } else if (id == R.id.action_logout) {
-            setResult(2);
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onUserInteraction() {
-        super.onUserInteraction();
-        Log.i("USER", "Something happened");
-        MainActivity.getTimeCounter().resetTimer();
-    }
-
     private class AsyncCaller extends AsyncTask<Void, Void, Void> {
         protected Void doInBackground(Void... params) {
             //If user idle for 60 seconds log him out
@@ -162,19 +163,5 @@ public class StandingOrders extends ActionBarActivity {
 
             return null;
         }
-    }
-
-    public static ArrayList<String> getList() {
-        return list;
-    }
-
-    public static void addToList(String newOrder) {
-        Log.i("StandingOrder", " new elements is added");
-        list.add(newOrder);
-        Log.i("StandingOrder", " Elements are : ");
-        for (int i = 0; i < list.size(); i++) {
-            Log.i("StandindOrder", list.get(i));
-        }
-
     }
 }
