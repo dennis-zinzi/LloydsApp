@@ -27,7 +27,7 @@
         android:layout_below="@+id/button_redeem1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:text="Product Information"
+        android:text="Account Information"
         android:width="200dp" />
 
     <Button
