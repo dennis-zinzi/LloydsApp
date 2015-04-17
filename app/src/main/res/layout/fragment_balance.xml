@@ -102,13 +102,32 @@
         android:id="@+id/exteriorBudgetsScroll">
 
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
             android:orientation="vertical"
-            android:id="@+id/exteriorBudgets">
-            ></LinearLayout>
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/exteriorBudgets"
+                android:layout_alignTop="@+id/exteriorBudgetsScroll"
+                android:layout_alignRight="@+id/overdraftText"
+                android:layout_alignEnd="@+id/overdraftText"><![CDATA[>]]>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="5dp"
+                    android:id="@+id/pointsSection"/>
 
+                </LinearLayout>
+
+        </LinearLayout>
     </ScrollView>
 
 
