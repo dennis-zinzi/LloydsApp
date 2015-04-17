@@ -19,6 +19,10 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
+/**
+ * Created by: Dennis Zinzi
+ * modified by: Rhys Covell
+ */
 public class BalanceFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";

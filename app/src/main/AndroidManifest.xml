@@ -69,7 +69,7 @@
         </activity>
         <activity
             android:name=".LoadingActivity"
-            android:label="@string/title_activity_loading" >
+            android:label="LLoyds Student" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

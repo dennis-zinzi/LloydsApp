@@ -11,7 +11,7 @@ import android.widget.TextView;
 import uk.ac.ncl.csc2022.team10.lloydsapp.R;
 
 /**
- * Created by Dennis on 15/4/15.
+ * Created by Dennis Zinzi on 15/4/15.
  */
 public class ComboAdapter extends ArrayAdapter<String> {
     private final Activity context;

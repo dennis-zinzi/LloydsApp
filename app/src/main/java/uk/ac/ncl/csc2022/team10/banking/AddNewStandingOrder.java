@@ -1,5 +1,7 @@
 package uk.ac.ncl.csc2022.team10.banking;
-/* Created by szholdiyarov
+
+/**
+ *  Created by Sanzhar Zholdiyarov
  * Purpose: Activity to add new standing orders
  */
 

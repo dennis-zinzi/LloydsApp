@@ -8,6 +8,7 @@ import com.google.android.gms.maps.GoogleMap;
 
 /**
  * Created by Dennis on 12/3/15.
+ * Adapted From: http://javapapers.com/android/find-places-nearby-in-google-maps-using-google-places-apiandroid-app/
  */
 public class GooglePlacesGetter extends AsyncTask<Object, Integer, String>{
     String googlePlacesData = null;

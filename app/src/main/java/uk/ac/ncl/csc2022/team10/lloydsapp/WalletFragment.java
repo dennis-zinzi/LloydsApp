@@ -1,6 +1,6 @@
 package uk.ac.ncl.csc2022.team10.lloydsapp;
 /**
- * Created by author: szholdiyarov
+ * Created by author: Sanzhar Zholdiyarov
  */
 
 import android.app.AlertDialog;

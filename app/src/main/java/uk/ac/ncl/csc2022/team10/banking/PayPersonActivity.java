@@ -21,6 +21,10 @@ import uk.ac.ncl.csc2022.team10.lloydsapp.MainActivity;
 import uk.ac.ncl.csc2022.team10.lloydsapp.R;
 import uk.ac.ncl.csc2022.team10.lloydsapp.SettingsActivity;
 
+
+/**
+ * Created by: Dennis Zinzi
+ */
 public class PayPersonActivity extends ActionBarActivity {
 
     User user;

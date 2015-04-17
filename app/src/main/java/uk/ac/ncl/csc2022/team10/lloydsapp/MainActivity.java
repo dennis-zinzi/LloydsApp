@@ -1,10 +1,10 @@
 package uk.ac.ncl.csc2022.team10.lloydsapp;
 
 /**
- * Created by Dennis.
+ * Created by Dennis Zinzi
  */
 /*
-    Modified by author: szholdiyarov
+    Modified by author: Sanzhar Zholdiyarov
  */
 
 import java.io.IOException;

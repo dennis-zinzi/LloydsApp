@@ -1,6 +1,6 @@
 package uk.ac.ncl.csc2022.team10.banking;
 /*
-    author: szholdiyarov
+    author: Sanzhar Zholdiyarov
     Purpose: Show standing activity
  */
 

@@ -1,7 +1,7 @@
 package uk.ac.ncl.csc2022.team10.datatypes;
 
 /**
- * Created by Dennis on 15/4/15.
+ * Created by Dennis Zinzi on 15/4/15.
  */
 public class TimeCounter {
     private long startTime;

@@ -20,6 +20,9 @@ import uk.ac.ncl.csc2022.team10.help.FAQActivity;
 import uk.ac.ncl.csc2022.team10.help.ProductInfoActivity;
 import uk.ac.ncl.csc2022.team10.locationmanager.LocateMapActivity;
 
+/**
+ * Created by: Dennis Zinzi
+ */
 public class HelpActivity extends ActionBarActivity implements OnClickListener {
 
     Button nearestBranch;

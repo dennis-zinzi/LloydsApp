@@ -1,9 +1,9 @@
 package uk.ac.ncl.csc2022.team10.datatypes;
 /**
- * Created by Dennis
+ * Created by Dennis Zinzi
  */
 /*
-    Modified by author: szholdiyarov
+    Modified by author: Sanzhar Zholdiyarov
     All wallet and points stuff modified by him.
  */
 

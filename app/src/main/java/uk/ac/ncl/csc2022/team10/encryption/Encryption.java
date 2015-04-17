@@ -1,7 +1,7 @@
 package uk.ac.ncl.csc2022.team10.encryption;
 
 /**
- * Created by szholdiyarov on 4/13/15.
+ * Created by Sanzhar Zholdiyarov on 13/4/15.
  * Purpose: Encrypt any text by using encryption table */
 
 import java.util.Map;

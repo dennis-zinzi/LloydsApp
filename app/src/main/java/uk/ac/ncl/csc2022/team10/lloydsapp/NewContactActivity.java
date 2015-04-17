@@ -19,7 +19,9 @@ import uk.ac.ncl.csc2022.team10.datatypes.Account;
 import uk.ac.ncl.csc2022.team10.datatypes.Contact;
 import uk.ac.ncl.csc2022.team10.datatypes.User;
 
-
+/**
+ * Created by: Dennis Zinzi
+ */
 public class NewContactActivity extends ActionBarActivity {
     User user;
     Button create;

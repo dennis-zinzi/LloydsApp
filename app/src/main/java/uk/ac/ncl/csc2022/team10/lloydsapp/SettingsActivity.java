@@ -20,6 +20,9 @@ import android.widget.EditText;
 
 import uk.ac.ncl.csc2022.team10.datatypes.User;
 
+/**
+ * Created by: Dennis Zinzi
+ */
 public class SettingsActivity extends ActionBarActivity {
 
     Button passwordChange;

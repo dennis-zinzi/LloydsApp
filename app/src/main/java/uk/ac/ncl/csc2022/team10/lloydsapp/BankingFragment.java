@@ -1,7 +1,7 @@
 package uk.ac.ncl.csc2022.team10.lloydsapp;
 
-/*
-    Modified by author: szholdiyarov
+/**
+  * Modified by author: Sanzhar Zholdiyarov
  */
 
 import android.content.Intent;
@@ -51,7 +51,7 @@ public class BankingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 intent = new Intent(getActivity(), StatementActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,2);
             }
         });
 
@@ -59,7 +59,7 @@ public class BankingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 intent = new Intent(getActivity(), PayPersonActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,2);
             }
         });
 
@@ -67,14 +67,14 @@ public class BankingFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 intent = new Intent(getActivity(), PayBills.class);
-                startActivity(intent);
+                startActivityForResult(intent,2);
             }
         });
         standingOrders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intent = new Intent(getActivity(), StandingOrders.class);
-                startActivity(intent);
+                startActivityForResult(intent,2);
             }
         });
         return rootView;

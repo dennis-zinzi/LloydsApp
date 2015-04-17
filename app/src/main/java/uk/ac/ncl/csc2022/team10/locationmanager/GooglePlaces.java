@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by Dennis on 13/4/15.
+ * Created by Dennis Zinzi on 13/4/15.
+ * Adapted from: http://javapapers.com/android/find-places-nearby-in-google-maps-using-google-places-apiandroid-app/
  */
 public class GooglePlaces {
 

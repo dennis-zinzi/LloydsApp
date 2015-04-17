@@ -1,6 +1,6 @@
 package uk.ac.ncl.csc2022.team10.notificationmanager;
 /*
-    Created by author: szholdiyarov
+    Created by author: Sanzhar Zholdiyarov
     Purpose: Register device id
  */
 

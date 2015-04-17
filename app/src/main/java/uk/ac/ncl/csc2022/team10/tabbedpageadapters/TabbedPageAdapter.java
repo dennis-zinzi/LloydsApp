@@ -1,7 +1,7 @@
 package uk.ac.ncl.csc2022.team10.tabbedpageadapters;
 
 /**
- * Created by Dennis on 7/3/15.
+ * Created by Dennis Zinzi on 7/3/15.
  */
 
 import android.support.v4.app.Fragment;

@@ -1,7 +1,7 @@
 package uk.ac.ncl.csc2022.team10.datatypes;
 
 /**
- * Created by szholdiyarov on 4/15/15.
+ * Created by Sanzhar Zholdiyarov on 15/4/15.
  * Purpose: Datatype "Points"
  */
 public class Points {

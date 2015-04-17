@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import uk.ac.ncl.csc2022.team10.locationmanager.*;
 
 /**
- * Created by Dennis on 10/3/15.
+ * Created by Dennis Zinzi on 10/3/15.
  */
 public class MapTabbedPageAdapter extends FragmentPagerAdapter{
 

@@ -22,7 +22,9 @@ import uk.ac.ncl.csc2022.team10.lloydsapp.MainActivity;
 import uk.ac.ncl.csc2022.team10.lloydsapp.R;
 import uk.ac.ncl.csc2022.team10.lloydsapp.SettingsActivity;
 
-
+/**
+ * Created by: Sanzhar Zholdiyarov
+ */
 public class PayBills extends ActionBarActivity {
 
     private Button button_PayBill;

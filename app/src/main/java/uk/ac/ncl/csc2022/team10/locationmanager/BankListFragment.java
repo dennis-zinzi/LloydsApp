@@ -18,7 +18,9 @@ import android.widget.ListView;
 import java.util.*;
 import uk.ac.ncl.csc2022.team10.lloydsapp.*;
 
-
+/**
+ * Created by: Dennis Zinzi
+ */
 public class BankListFragment extends Fragment {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

@@ -19,7 +19,7 @@ import uk.ac.ncl.csc2022.team10.lloydsapp.TransferFragment;
 
 
 /**
- * Created by Dennis on 7/4/15.
+ * Created by Dennis Zinzi on 7/4/15.
  */
 public class ContactDialog extends DialogFragment {
 
@@ -69,7 +69,7 @@ public class ContactDialog extends DialogFragment {
                         if (which == contactList.size()) {
                             //Go to screen to add new Contact
                             Intent i = new Intent(getActivity(), NewContactActivity.class);
-                            startActivity(i);
+                            startActivityForResult(i,2);
                             dismiss();
                         } else {
                             selected = contactList.get(which);

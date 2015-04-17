@@ -8,6 +8,9 @@ import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 
+/**
+ * Created by: Dennis Zinzi
+ */
 public class LoadingActivity extends Activity {
 
     @Override

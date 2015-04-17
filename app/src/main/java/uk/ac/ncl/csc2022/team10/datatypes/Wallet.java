@@ -1,7 +1,7 @@
 package uk.ac.ncl.csc2022.team10.datatypes;
 
-/*
-    Created by author: szholdiyarov
+/**
+    Created by author: Sanzhar Zholdiyarov
  */
 
 
