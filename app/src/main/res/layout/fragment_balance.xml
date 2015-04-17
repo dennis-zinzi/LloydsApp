@@ -20,23 +20,6 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/maxL1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/progressBar1"
-        android:text="£MAX"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_alignTop="@+id/progressBar2"
-        android:text="£0" />
-
-    <TextView
         android:id="@+id/overdraftText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,50 +30,14 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/textView_NectarPoints"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView11"
-        android:layout_alignLeft="@+id/textView5"
-        android:text="Groceries"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView5"
         android:layout_below="@+id/textView8"
         android:layout_marginTop="34dp"
         android:text="Budgets:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/textView4"
-        android:layout_marginTop="20dp"
-        android:text="Personal"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView5"
-        android:layout_toLeftOf="@+id/textView8"
-        android:text="£0" />
-
-    <ProgressBar
-        android:id="@+id/progressBar1"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView1"
-        android:layout_toLeftOf="@+id/overdraftText"
-        android:minWidth="125dp" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_alignLeft="@+id/textView2" />
 
     <Button
         android:id="@+id/budgetManage"
@@ -102,15 +49,6 @@
         android:layout_marginBottom="15dp"
         android:text="Manage Budgets" />
 
-    <Button
-        android:id="@+id/addToBudget"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/budgetManage"
-        android:layout_alignLeft="@+id/budgetManage"
-        android:layout_alignRight="@+id/budgetManage"
-        android:text="Add To Budget" />
-
     <TextView
         android:id="@+id/textView_LloydsPoints"
         android:layout_width="wrap_content"
@@ -121,46 +59,27 @@
         android:text="@string/pound_symbol"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <ProgressBar
-        android:id="@+id/progressBar2"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/progressBar1"
-        android:layout_alignRight="@+id/progressBar1"
-        android:layout_below="@+id/maxL1"
-        android:layout_marginTop="37dp" />
-
-    <TextView
-        android:id="@+id/maxL2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/progressBar2"
-        android:layout_alignLeft="@+id/maxL1"
-        android:text="£MAX"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
     <TextView
         android:id="@+id/balanceText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView3"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_alignRight="@+id/maxL1"
         android:text="0.00"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="50sp" />
+        android:textSize="50sp"
+        android:layout_below="@+id/balanceLabel"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/balanceLabel"
-        android:layout_marginTop="20dp"
         android:text="@string/pound_symbol"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="50sp" />
+        android:textSize="50sp"
+        android:layout_alignTop="@+id/balanceText"
+        android:layout_toLeftOf="@+id/balanceText"
+        android:layout_toStartOf="@+id/balanceText" />
 
     <TextView
         android:id="@+id/textView8"
@@ -170,6 +89,27 @@
         android:layout_toLeftOf="@+id/balanceText"
         android:text="Overdraft:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ScrollView
+
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView4"
+        android:layout_above="@+id/budgetManage"
+        android:layout_alignRight="@+id/balanceText"
+        android:id="@+id/exteriorBudgetsScroll">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:id="@+id/exteriorBudgets">
+            ></LinearLayout>
+
+
+    </ScrollView>
 
 
 </RelativeLayout>
