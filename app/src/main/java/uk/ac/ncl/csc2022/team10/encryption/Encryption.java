@@ -2,19 +2,19 @@ package uk.ac.ncl.csc2022.team10.encryption;
 
 /**
  * Created by szholdiyarov on 4/13/15.
- */
-import java.util.HashMap;
-import java.util.Iterator;
+ * Purpose: Encrypt any text by using encryption table */
+
 import java.util.Map;
 
-public class Encryption {
+import java.util.HashMap;
+import java.util.Iterator;
 
+public class Encryption {
+    /* Declaration of variables */
     private Map<Integer, String> numericalTable = new HashMap<Integer, String>();
     private String result;
-    private Integer answer;
-    private final static String USER_AGENT = "Mozilla/5.0";
-    private Exception exception;
 
+    /* Constructor to set encryption table */
     public Encryption() {
         numericalTable.put(11, "a");
         numericalTable.put(12, "b");

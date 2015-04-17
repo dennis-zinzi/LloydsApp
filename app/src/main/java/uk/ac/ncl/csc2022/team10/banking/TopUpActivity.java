@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 
 /*
     author: szholdiyarov
+    purpose: This is activity which allow user to top up their wallets.
  */
 import android.app.AlertDialog;
 import android.content.Context;
@@ -23,66 +24,61 @@ import uk.ac.ncl.csc2022.team10.lloydsapp.R;
 public class TopUpActivity extends ActionBarActivity {
 
     /* Declaration of variables */
-    private TextView walletNameView;
-    private TextView currentBalanceView;
-    private EditText amountTopUp;
-    private Button buttonTopUp;
-    private Button buttonClose;
-    private String walletsName;
+    private TextView textView_walletName;
+    private TextView textView_currentBalance;
+    private EditText editText_amount;
+    private Button button_TopUp;
+    private Button button_Close;
+    private String walletName;
+    private String amount;
+    private double convertedAmount;
     private double balance;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_up);
+        /* Get parameters */
         Bundle b = getIntent().getExtras();
+        walletName = b.getString("name");
+        balance = b.getDouble("balance");
+        /* Set textViews, edit text field and buttons */
+        textView_walletName = (TextView) findViewById(R.id.textView_Wallet);
+        textView_currentBalance = (TextView) findViewById(R.id.textView_CurrentBalanceDisplay);
+        editText_amount = (EditText) findViewById(R.id.editText_TopUp);
+        button_TopUp = (Button) findViewById(R.id.button_topUp);
+        button_Close = (Button) findViewById(R.id.button_close);
+        /* Set appropriate wallet name and current balance to display */
+        textView_walletName.setText(walletName);
+        textView_currentBalance.setText(String.format("%.2f", balance));
+        context = this;
 
-        walletsName = b.getString("name");
-        balance = b.getDouble("balance1");
-        walletNameView = (TextView) findViewById(R.id.textView_Wallet);
-        currentBalanceView = (TextView) findViewById(R.id.textView_CurrentBalanceDisplay);
-        amountTopUp = (EditText) findViewById(R.id.editText_TopUp);
-
-        walletNameView.setText(walletsName);
-        currentBalanceView.setText(String.format("%.2f", balance));
-
-        buttonTopUp = (Button) findViewById(R.id.button_topUp);
-        buttonClose = (Button) findViewById(R.id.button_close);
-        final Context context = this;
-        buttonTopUp.setOnClickListener(new View.OnClickListener() {
+        /* Set buttons listeners */
+        button_TopUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String amount = amountTopUp.getText().toString();
-                if (amountTopUp.getText().toString().matches("")) {
-                    new AlertDialog.Builder(context)
-                            .setTitle("Something wrong")
-                            .setMessage("Please enter amount")
-                            .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            })
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
+                if (editText_amount.getText().toString().matches("")) { // If no input
+                    printAlertSomethingWrong(context);
                 } else {
+                    /* Get text and convert it to double */
+                    amount = editText_amount.getText().toString();
+                    convertedAmount = Double.parseDouble(amount);
                     try {
-                        MainActivity.setNewWalletBalance(walletsName, Double.parseDouble(amount));
-                        MainActivity.getUser().getAccount().transferFund(Double.parseDouble(amount), MainActivity.getUser().getAccount());
+                        topUp(convertedAmount);
                         printAlertSuccess(context);
-                    } catch (NumberFormatException e) {
-                        String modified = amount + ".00";
-                        MainActivity.setNewWalletBalance(walletsName, Double.parseDouble(modified));
-                        MainActivity.getUser().getAccount().transferFund(Double.parseDouble(modified), MainActivity.getUser().getAccount());
+                    } catch (NumberFormatException e) { // If exception => try again
+                        topUp(convertedAmount);
                         printAlertSuccess(context);
                     }
                 }
 
             }
         });
-        buttonClose.setOnClickListener(new View.OnClickListener() {
+        button_Close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                finish(); // Finish activity
             }
         });
     }
@@ -106,6 +102,7 @@ public class TopUpActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /* Show alert dialog with "success" */
     public void printAlertSuccess(Context context) {
         new AlertDialog.Builder(context)
                 .setTitle("Well done")
@@ -113,9 +110,30 @@ public class TopUpActivity extends ActionBarActivity {
                 .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
+                        finish();
                     }
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+    }
+    /* Show alert dialog with "try again" */
+    public void printAlertSomethingWrong(Context context) {
+        new AlertDialog.Builder(context)
+                .setTitle("Something wrong")
+                .setMessage("Please enter amount")
+                .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+
+    }
+    /* Set new balance to wallet, remove it from account and transfer it*/
+    public void topUp(double convertedAmount) {
+        MainActivity.setNewWalletBalance(walletName, convertedAmount);
+        MainActivity.getUser().getAccount().transferFund(convertedAmount, MainActivity.getUser().getAccount());
+        MainActivity.getUser().getAccount().removeBalance(convertedAmount);
     }
 }

@@ -1,10 +1,7 @@
 package uk.ac.ncl.csc2022.team10.datatypes;
 
-/**
- * Created by Dennis on 7/3/15.
- */
 /*
-    Modified by author: szholdiyarov
+    Created by author: szholdiyarov
  */
 
 

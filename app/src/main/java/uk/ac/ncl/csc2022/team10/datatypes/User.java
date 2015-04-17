@@ -4,6 +4,7 @@ package uk.ac.ncl.csc2022.team10.datatypes;
  */
 /*
     Modified by author: szholdiyarov
+    All wallet and points stuff modified by him.
  */
 
 import android.util.Log;
@@ -95,11 +96,8 @@ public class User {
     }
 
     public Wallet getWalletByName(String name) {
-        Log.i("Wallets", "Start working with " + name);
         for (int i = 0; i < wallets.size(); i++) {
-            Log.i("Wallets", "for w : " + wallets.get(i).getName());
             if (wallets.get(i).getName().equals(name)) {
-                Log.i("Wallets", "return  " + wallets.get(i));
                 return wallets.get(i);
             }
         }
