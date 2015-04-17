@@ -3,19 +3,30 @@ package uk.ac.ncl.csc2022.team10.banking;
  * Purpose: Activity to add new standing orders
  */
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import uk.ac.ncl.csc2022.team10.lloydsapp.R;
 
 public class AddNewStandingOrder extends ActionBarActivity {
+    private Button buttonAdd;
+    private EditText nameEditText;
+    private EditText amountEditText;
+    private EditText dateEditText;
+    private String newOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_standing_order);
+        addListenerOnButton();
     }
 
 
@@ -37,5 +48,24 @@ public class AddNewStandingOrder extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void addListenerOnButton() {
+        buttonAdd = (Button) findViewById(R.id.button_standing_order_add);
+        nameEditText = (EditText) findViewById(R.id.editText_standing_order_name);
+        amountEditText = (EditText) findViewById(R.id.editText_standing_order_amount);
+        dateEditText = (EditText) findViewById(R.id.editText_standing_order_date);
+
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+                                         @Override
+                                         public void onClick(View v) {
+                                             newOrder = nameEditText.getText().toString() + " | " + amountEditText.getText().toString() + " | " + dateEditText.getText().toString() + " | To pay";
+                                             Log.i("AddNewStandingOrder", newOrder);
+                                             StandingOrders.addToList(newOrder);
+                                             finish();
+                                         }
+                                     }
+
+        );
     }
 }

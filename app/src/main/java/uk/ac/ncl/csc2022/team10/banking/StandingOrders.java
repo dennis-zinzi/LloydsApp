@@ -36,9 +36,9 @@ import uk.ac.ncl.csc2022.team10.lloydsapp.SettingsActivity;
 
 public class StandingOrders extends ActionBarActivity {
     /* Declaration of variables */
-    private String[] values;
-    private ListView listView;
-    private ArrayList<String> list;
+    private static String[] values;
+    private static ListView listView;
+    private static ArrayList<String> list;
     private StableArrayAdapter adapter;
     private Button buttonAdd;
 
@@ -66,6 +66,15 @@ public class StandingOrders extends ActionBarActivity {
         } else {
             new AsyncCaller().execute();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+       // adapter.notifyDataSetChanged();
+
+        Log.i("StandingOrder","onResume");
+
     }
 
     public void addListenerOnButton() {
@@ -153,7 +162,19 @@ public class StandingOrders extends ActionBarActivity {
 
             return null;
         }
-
     }
 
+    public static ArrayList<String> getList() {
+        return list;
+    }
+
+    public static void addToList(String newOrder) {
+        Log.i("StandingOrder", " new elements is added");
+        list.add(newOrder);
+        Log.i("StandingOrder", " Elements are : ");
+        for (int i = 0; i < list.size(); i++) {
+            Log.i("StandindOrder", list.get(i));
+        }
+
+    }
 }
