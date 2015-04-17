@@ -25,9 +25,10 @@ public class User {
     private List<Points> points;
 
 
-    public User(String name, String userID, Account account) {
+    public User(String name, String userID, String password, Account account) {
         this.name = name;
         this.userID = userID;
+        this.password = password;
         budgets = new ArrayList<Budget>();
         this.account = account;
         contacts = new ArrayList<Contact>();

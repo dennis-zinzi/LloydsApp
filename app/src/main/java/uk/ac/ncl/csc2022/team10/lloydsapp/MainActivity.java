@@ -184,7 +184,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
      */
     public void makeUserExample() {
         Account a = new Account(1, 100, 1000);
-        user = new User("Dennis", "123456", a);
+        user = new User("Dennis", "123456", "hello1",a);
 
         user.addContact(new Contact("Tom", new Account(2, 50, 1000)));
         user.addContact(new Contact("Sanzhar", new Account(3, 190, 5000)));

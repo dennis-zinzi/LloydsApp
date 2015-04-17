@@ -89,7 +89,7 @@ public class LoginActivity extends Activity implements OnClickListener {
                                 account = (EditText) findViewById(R.id.toContact);
 
                                 Account a = new Account(1, 10000, 1000);
-                                user = new User("Dennis", "123456", a);
+                                user = new User("Dennis", "123456", password.getText().toString(), a);
                                 MainActivity.setUser(user);
                                 MainActivity.setWallets();
                                 MainActivity.setPoints();
