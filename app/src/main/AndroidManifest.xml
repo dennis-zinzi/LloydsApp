@@ -144,6 +144,10 @@
             android:name="uk.ac.ncl.csc2022.team10.banking.StandingOrders"
             android:label="@string/title_activity_standing_orders" >
         </activity>
+        <activity
+            android:name="uk.ac.ncl.csc2022.team10.banking.AddNewStandingOrder"
+            android:label="@string/title_activity_add_new_standing_order" >
+        </activity>
     </application>
 
 </manifest>

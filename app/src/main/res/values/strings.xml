@@ -61,5 +61,6 @@
     <string name="title_activity_activity_redeem">activity_redeem</string>
     <string name="title_activity_pay_bills">PayBills</string>
     <string name="title_activity_standing_orders">StandingOrders</string>
+    <string name="title_activity_add_new_standing_order">Add New Standing Order</string>
 
 </resources>
