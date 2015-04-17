@@ -1,15 +1,17 @@
 package uk.ac.ncl.csc2022.team10.lloydsapp;
+/**
+ * Created by Dennis.
+ */
+/*
+    Modified by author: szholdiyarov
+ */
 
 import android.app.Activity;
-//import android.view.*;
-//import android.app.AlertDialog;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-//import android.graphics.Color;
-//import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,9 +30,7 @@ import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
 import uk.ac.ncl.csc2022.team10.datatypes.Account;
-import uk.ac.ncl.csc2022.team10.datatypes.Contact;
 import uk.ac.ncl.csc2022.team10.datatypes.User;
-import uk.ac.ncl.csc2022.team10.datatypes.Wallet;
 import uk.ac.ncl.csc2022.team10.encryption.Encryption;
 
 public class LoginActivity extends Activity implements OnClickListener {
@@ -42,10 +42,8 @@ public class LoginActivity extends Activity implements OnClickListener {
     private final static String USER_AGENT = "Mozilla/5.0";
     private static User user;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i("Login", "On create");
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_login);
@@ -53,13 +51,12 @@ public class LoginActivity extends Activity implements OnClickListener {
         password = (EditText) findViewById(R.id.editText3);
         password.setText("hello1");
         account.setText("12345");
-        addListenerOnButton();
 
+        addListenerOnButton();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_login, menu);
         return true;
 
@@ -67,9 +64,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // Handle action bar item clicks here.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
@@ -79,70 +74,82 @@ public class LoginActivity extends Activity implements OnClickListener {
 
     public void addListenerOnButton() {
         final Context context = this;
-        final Intent intent1 = new Intent(this, MainActivity.class);
-
+        final Intent newIntent = new Intent(this, MainActivity.class);
 
         loginButton = (Button) findViewById(R.id.login);
         exitButton = (Button) findViewById(R.id.exit);
 
         //Add listener using Anonymous class
         loginButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    MyAsyncTask asyncTask;
-                    asyncTask = new MyAsyncTask();
+                                           @Override
+                                           public void onClick(View v) {
+                                               try {
+                                                   MyAsyncTask asyncTask;
+                                                   asyncTask = new MyAsyncTask();
+                                                   Integer result = asyncTask.execute().get();
+                                                   if (result == 1) {
 
-                    Integer result = asyncTask.execute().get();
-                    if (result == 1) {
-                        account = (EditText) findViewById(R.id.toContact);
-                        Log.i("MY SYSTEM", "All passed");
-                        Account a = new Account(1, 10000, 1000);
-                        user = new User("Dennis", "123456", a);
-                        MainActivity.setUser(user);
-                        MainActivity.setWallets();
-                        MainActivity.setPoints();
+                                                       account = (EditText) findViewById(R.id.toContact);
 
-                        startActivity(intent1);
-                        asyncTask.cancel(true);
+                                                       Account a = new Account(1, 10000, 1000);
+                                                       user = new User("Dennis", "123456", a);
+                                                       MainActivity.setUser(user);
+                                                       MainActivity.setWallets();
+                                                       MainActivity.setPoints();
 
-                    } else {
-                        Log.i("MY SYSTEM", "BAD");
-                        new AlertDialog.Builder(context)
-                                .setTitle("Something wrong")
-                                .setMessage("Please check your details and try again")
-                                .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Intent intent = new Intent(LoginActivity.this,
-                                                LoginActivity.class);
+                                                       startActivity(newIntent);
+                                                       asyncTask.cancel(true);
 
-                                        startActivity(intent);
-                                        dialog.cancel();
-                                    }
-                                })
-                                .setIcon(android.R.drawable.ic_dialog_alert)
-                                .show();
+                                                   } else {
+                                                       new AlertDialog.Builder(context)
+                                                               .setTitle("Something wrong")
+                                                               .setMessage("Please check your details and try again")
+                                                               .setPositiveButton("OK!", new DialogInterface.OnClickListener() {
+                                                                   public void onClick(DialogInterface dialog, int which) {
+                                                                       Intent intent = new Intent(LoginActivity.this,
+                                                                               LoginActivity.class);
 
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-            }
+                                                                       startActivity(intent);
+                                                                       dialog.cancel();
+                                                                   }
+                                                               })
+                                                               .setIcon(android.R.drawable.ic_dialog_alert)
+                                                               .show();
 
-        });
+                                                   }
+                                               } catch (
+                                                       InterruptedException e
+                                                       )
+
+                                               {
+                                                   e.printStackTrace();
+                                               } catch (
+                                                       ExecutionException e
+                                                       )
+
+                                               {
+                                                   e.printStackTrace();
+                                               }
+                                           }
+
+                                       }
+
+        );
 
 
-        exitButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        exitButton.setOnClickListener(new
+
+                                              OnClickListener() {
+                                                  @Override
+                                                  public void onClick(View v) {
                     /* Exit app */
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.addCategory(Intent.CATEGORY_HOME);
-                startActivity(intent);
-            }
-        });
+                                                      Intent intent = new Intent(Intent.ACTION_MAIN);
+                                                      intent.addCategory(Intent.CATEGORY_HOME);
+                                                      startActivity(intent);
+                                                  }
+                                              }
+
+        );
     }
 
     @Override
@@ -175,7 +182,6 @@ public class LoginActivity extends Activity implements OnClickListener {
             enteredAccount = account.getText().toString();
             enteredPassword = password.getText().toString();
             encrypted = enc.encrypt(enteredPassword);
-            Log.i("MyAsyncTask", "Here what i have : " + enteredAccount + ", " + enteredPassword + ", " + encrypted);
             try {
                 url = "http://zholdiyarov.zz.mu/encrypt.php";
                 obj = new URL(url);
@@ -203,6 +209,7 @@ public class LoginActivity extends Activity implements OnClickListener {
                         return 0;
                     }
                 }
+
                 in.close();
             } catch (Exception e) {
                 return 0;

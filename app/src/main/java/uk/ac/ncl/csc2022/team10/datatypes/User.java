@@ -1,6 +1,11 @@
 package uk.ac.ncl.csc2022.team10.datatypes;
+/**
+ * Created by Dennis
+ */
+/*
+    Modified by author: szholdiyarov
+ */
 
-import android.graphics.Point;
 import android.util.Log;
 
 import java.util.*;
@@ -105,7 +110,7 @@ public class User {
         points.add(p);
     }
 
-    public List<Points> getPoints(){
+    public List<Points> getPoints() {
         return points;
     }
 

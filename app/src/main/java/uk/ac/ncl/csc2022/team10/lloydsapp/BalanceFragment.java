@@ -1,8 +1,6 @@
 package uk.ac.ncl.csc2022.team10.lloydsapp;
 
-
 import uk.ac.ncl.csc2022.team10.datatypes.*;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,8 +10,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-//import android.widget.TextView;
 
 public class BalanceFragment extends Fragment {
 
@@ -86,8 +82,8 @@ public class BalanceFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getActivity(),BudgetActivity.class);
-                startActivity(intent);
+               // Intent intent = new Intent(getActivity(),BudgetActivity.class);
+                //startActivity(intent);
             }
         });
 

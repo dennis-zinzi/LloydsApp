@@ -1,18 +1,20 @@
 package uk.ac.ncl.csc2022.team10.lloydsapp;
 
-//import android.os.Build;
+/**
+ * Created by Dennis.
+ */
+/*
+    Modified by author: szholdiyarov
+ */
 
 import java.io.IOException;
-import java.util.Timer;
 
-//import android.app.ActionBar;
-//import android.app.ActionBar.Tab;
+import android.os.Build;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-//import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.*;
 import android.support.v4.view.ViewPager;
@@ -40,9 +42,9 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
     private static User user;
 
     /*Notifications*/
-    GoogleCloudMessaging gcm;
-    String regid;
-    String PROJECT_NUMBER = "752723874311";
+    private GoogleCloudMessaging gcm;
+    private String regid;
+    private String PROJECT_NUMBER = "752723874311";
 
     public void getRegId() {
         new AsyncTask<Void, Void, String>() {
@@ -119,8 +121,12 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
             public void onPageScrollStateChanged(int arg0) {
             }
         });
-        new AsyncCaller().execute();
-
+        //new AsyncCaller().execute();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            new AsyncCaller().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        } else {
+            new AsyncCaller().execute();
+        }
     }
 
     @Override
@@ -215,7 +221,7 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         user.addWallet(new Wallet("Phone", 4.5));
     }
 
-    public static void setPoints(){
+    public static void setPoints() {
         user.addPoint(new Points(5.0));
         user.addPoint(new Points(1.5));
     }
@@ -225,12 +231,14 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         user.getWalletByName(name).setBalance(amount);
     }
 
-    public static void redeemNectar(){
+    public static void redeemNectar() {
         user.getPoints().get(0).setPoints(0);
     }
-    public static void redeemLloyds(){
+
+    public static void redeemLloyds() {
         user.getPoints().get(1).setPoints(0);
     }
+
     private class AsyncCaller extends AsyncTask<Void, Void, Void> {
         protected Void doInBackground(Void... params) {
             //If user idle for 60 seconds log him out

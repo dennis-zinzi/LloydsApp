@@ -1,16 +1,15 @@
 package uk.ac.ncl.csc2022.team10.datatypes;
 
-import android.util.Log;
-import android.widget.TextView;
-
-import uk.ac.ncl.csc2022.team10.lloydsapp.LoginActivity;
-
 /**
  * Created by Dennis on 7/3/15.
  */
+/*
+    Modified by author: szholdiyarov
+ */
+
 
 public class Wallet {
-    private  String name;
+    private String name;
     private double balance;
 
     public Wallet(String name, double balance) {
@@ -27,7 +26,7 @@ public class Wallet {
     }
 
     public void setBalance(double newBalance) {
-        balance = balance+newBalance;
+        balance = balance + newBalance;
     }
 
 }

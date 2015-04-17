@@ -1,4 +1,10 @@
 package uk.ac.ncl.csc2022.team10.lloydsapp;
+/**
+ * Created by Dennis.
+ */
+/*
+    Modified by author: szholdiyarov
+ */
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -44,7 +50,7 @@ public class BankingFragment extends Fragment {
         viewStatement = (Button) rootView.findViewById(R.id.topUp_button);
         payPerson = (Button) rootView.findViewById(R.id.payPerson);
         payBills = (Button) rootView.findViewById(R.id.payBills);
-        standingOrders=(Button) rootView.findViewById(R.id.standingOrders);
+        standingOrders = (Button) rootView.findViewById(R.id.standingOrders);
         viewStatement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
